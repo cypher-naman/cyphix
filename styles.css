@@ -1,0 +1,501 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d5016 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #4CAF50;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 2rem 60px;
+}
+
+/* Home Page Styles */
+.hero {
+    text-align: center;
+    color: white;
+    margin-bottom: 4rem;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #4CAF50, #81C784);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.phone-mockup-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 4rem 0;
+    height: 700px;
+}
+
+/* Realistic iPhone Mockup */
+.iphone-mockup {
+    width: 280px;
+    height: 572px;
+    background: #000;
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 
+        0 0 0 2px #333,
+        0 0 0 7px #000,
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 40px 80px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: rotate(-5deg);
+}
+
+/* iPhone Camera Notch */
+.iphone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 30px;
+    background: #000;
+    border-radius: 0 0 15px 15px;
+    z-index: 2;
+}
+
+/* Home Indicator */
+.iphone-mockup::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: #666;
+    border-radius: 2px;
+}
+
+.iphone-screen {
+    width: 260px;
+    height: 552px;
+    background: linear-gradient(135deg, #0d1b0f 0%, #1a1a1a 50%, #0d1b0f 100%);
+    border-radius: 32px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Status Bar */
+.status-bar {
+    height: 44px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.app-header {
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.app-header h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.app-header p {
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+.app-content {
+    padding: 20px;
+    color: white;
+    flex: 1;
+}
+
+.workout-card {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px 0;
+    backdrop-filter: blur(10px);
+}
+
+.workout-card h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #4CAF50;
+}
+
+.workout-card p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.stat-box {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.1));
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    flex: 1;
+}
+
+.stat-box h4 {
+    font-size: 18px;
+    color: #4CAF50;
+    margin-bottom: 5px;
+}
+
+.stat-box p {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* 3D Running Figure */
+.running-figure {
+    position: absolute;
+    right: -120px;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.runner-body {
+    width: 80px;
+    height: 120px;
+    position: relative;
+    animation: run 2s ease-in-out infinite;
+}
+
+.runner-head {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.runner-torso {
+    width: 20px;
+    height: 40px;
+    background: #66BB6A;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+.runner-arm {
+    width: 15px;
+    height: 30px;
+    background: #66BB6A;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.runner-arm.left {
+    top: 30px;
+    left: 15px;
+    transform: rotate(-20deg);
+    animation: armSwing 2s ease-in-out infinite;
+}
+
+.runner-arm.right {
+    top: 30px;
+    right: 15px;
+    transform: rotate(20deg);
+    animation: armSwing 2s ease-in-out infinite reverse;
+}
+
+.runner-leg {
+    width: 18px;
+    height: 35px;
+    background: #4CAF50;
+    position: absolute;
+    border-radius: 8px;
+}
+
+.runner-leg.left {
+    bottom: 0;
+    left: 25px;
+    transform: rotate(10deg);
+    animation: legSwing 2s ease-in-out infinite;
+}
+
+.runner-leg.right {
+    bottom: 0;
+    right: 25px;
+    transform: rotate(-10deg);
+    animation: legSwing 2s ease-in-out infinite reverse;
+}
+
+@keyframes run {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-55%) translateX(10px);
+    }
+}
+
+@keyframes armSwing {
+    0%, 100% {
+        transform: rotate(-20deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+}
+
+@keyframes legSwing {
+    0%, 100% {
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: rotate(-30deg);
+    }
+}
+
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.7;
+    color: #4CAF50;
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-icon:nth-child(1) {
+    top: 15%;
+    left: 8%;
+    animation-delay: 0s;
+}
+
+.floating-icon:nth-child(2) {
+    top: 65%;
+    right: 5%;
+    animation-delay: 1s;
+}
+
+.floating-icon:nth-child(3) {
+    bottom: 15%;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+.floating-icon:nth-child(4) {
+    top: 35%;
+    left: 5%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Content Pages */
+.page-content {
+    padding: 120px 2rem 60px;
+}
+
+.content-page {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    color: #333;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.content-page h1 {
+    color: #2E7D32;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.content-page h2 {
+    color: #388E3C;
+    margin: 2rem 0 1rem 0;
+    font-size: 1.8rem;
+}
+
+.content-page p, .content-page li {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.content-page ul {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-button:hover {
+    background: linear-gradient(45deg, #388E3C, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .iphone-mockup {
+        width: 240px;
+        height: 490px;
+        transform: rotate(-3deg);
+    }
+    
+    .iphone-screen {
+        width: 220px;
+        height: 470px;
+    }
+    
+    .running-figure {
+        right: -80px;
+        top: 40%;
+    }
+    
+    .runner-body {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .content-page {
+        padding: 2rem;
+    }
+
+    .phone-mockup-section {
+        height: 600px;
+    }
+}
