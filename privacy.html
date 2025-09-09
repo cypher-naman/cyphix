@@ -5,24 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - FitSensei</title>
     <link rel="stylesheet" href="styles.css">
+<style>
+    /* Page-specific styles */
+    .content-page {
+        color: white;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .content-page h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #4CAF50;
+    }
+
+    .content-page ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .content-page p {
+        margin-bottom: 1.2rem;
+    }
+
+    /* Back button styled inverse (white button, green text) */
+    .back-button {
+        display: inline-block;
+        margin-bottom: 2rem;
+        padding: 10px 20px;
+        background: white;
+        color: #4CAF50;
+        border-radius: 30px;
+        font-size: 0.95rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+        background: #4CAF50;
+        color: white;
+        box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+    }
+
+
+    /* Make links green inside content */
+    .content-page a {
+        color: #4CAF50;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .content-page a:hover {
+        text-decoration: underline;
+    }
+</style>
+
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">FitSensei</div>
+            <div class="logo">
+                <div class="logo-icon">F</div>
+                FitSensei
+            </div>
             <div class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="privacy.html" class="active">Privacy Policy</a>
                 <a href="terms.html">Terms & Conditions</a>
             </div>
         </div>
     </nav>
 
-    <div class="container page-content">
+    <div class="container">
+        <div class="hero">
+            <h1>Privacy Policy</h1>
+            <p>Learn how FitSensei protects and uses your data</p>
+        </div>
+
         <div class="content-page">
             <a href="index.html" class="back-button">← Back to Home</a>
-            <h1>Privacy Policy</h1>
-            
+
             <h2>Information We Collect</h2>
             <p>FitSensei collects information you provide directly to us, such as when you create an account, update your profile, or contact us for support. This includes:</p>
             <ul>
@@ -52,10 +117,16 @@
             <p>You have the right to access, update, or delete your personal information at any time through your account settings. You may also contact us directly for assistance with your data rights.</p>
 
             <h2>Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at fitsensei@cyphix.org</p>
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
             
             <p><em>Last updated: September 2025</em></p>
         </div>
+    </div>
+
+    <div class="footer">
+        <h3>Need Support?</h3>
+        <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
+        <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
     </div>
 
     <script src="script.js"></script>

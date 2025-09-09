@@ -5,72 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitSensei - Your Ultimate Fitness Companion</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">FitSensei</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+            <div class="logo">
+                <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+                FitSensei
             </div>
+        <div class="nav-links">
+            <a href="index.html">
+                <span class="nav-text">Home</span>
+                <span class="nav-icon">🏠</span>
+            </a>
+            <a href="privacy.html">
+                <span class="nav-text">Privacy Policy</span>
+                <span class="nav-icon">🔒</span>
+            </a>
+            <a href="terms.html">
+                <span class="nav-text">Terms & Conditions</span>
+                <span class="nav-icon">📜</span>
+            </a>
+        </div>
         </div>
     </nav>
 
-    <!-- Home Page -->
     <div class="container">
         <div class="hero">
             <h1>Master Your Fitness Journey</h1>
             <p>The ultimate iOS app for tracking workouts, monitoring progress, and achieving your fitness goals with AI-powered insights</p>
-            <button class="cta-button">Download on App Store</button>
+            <button class="cta-button" onclick="window.open('https://apps.apple.com', '_blank')">Download on App Store</button>
         </div>
 
-        <div class="phone-mockup-section">
+        <!-- Desktop Version - All 5 Mockups -->
+        <div class="phone-mockups-desktop">
             <div class="floating-elements">
                 <div class="floating-icon">💪</div>
                 <div class="floating-icon">⚡</div>
                 <div class="floating-icon">🔥</div>
                 <div class="floating-icon">🏃‍♂️</div>
+                <div class="floating-icon">⭐</div>
+                <div class="floating-icon">🎯</div>
             </div>
             
-            <div class="iphone-mockup">
+            <!-- Phone 1 -->
+            <div class="iphone-mockup mockup-1">
                 <div class="iphone-screen">
-                    <div class="status-bar">
-                        <span>9:41</span>
-                        <span>🔋100%</span>
+                    <div class="screenshot-container">
+                        <img src="1.png" alt="FitSensei Screenshot 1" class="screenshot" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-text" style="display: none;">Dashboard</div>
                     </div>
-                    <div class="app-header">
-                        <h3>FitSensei</h3>
-                        <p>Your AI Fitness Coach</p>
+                </div>
+            </div>
+
+            <!-- Phone 2 -->
+            <div class="iphone-mockup mockup-2">
+                <div class="iphone-screen">
+                    <div class="screenshot-container">
+                        <img src="2.png" alt="FitSensei Screenshot 2" class="screenshot" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-text" style="display: none;">Workouts</div>
                     </div>
-                    <div class="app-content">
-                        <div class="workout-card">
-                            <h4>🏃‍♀️ Morning Run</h4>
-                            <p>5.2 km • 28 minutes • 420 cal</p>
-                        </div>
-                        <div class="workout-card">
-                            <h4>💪 Strength Training</h4>
-                            <p>45 minutes • Upper Body • 380 cal</p>
-                        </div>
-                        <div class="workout-card">
-                            <h4>🧘‍♀️ Yoga Session</h4>
-                            <p>30 minutes • Flexibility • 120 cal</p>
-                        </div>
-                        <div class="stats-row">
-                            <div class="stat-box">
-                                <h4>1,247</h4>
-                                <p>Calories</p>
-                            </div>
-                            <div class="stat-box">
-                                <h4>8,432</h4>
-                                <p>Steps</p>
-                            </div>
-                            <div class="stat-box">
-                                <h4>73</h4>
-                                <p>Avg BPM</p>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+            <!-- Phone 3 -->
+            <div class="iphone-mockup mockup-3">
+                <div class="iphone-screen">
+                    <div class="screenshot-container">
+                        <img src="3.png" alt="FitSensei Screenshot 3" class="screenshot" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-text" style="display: none;">Progress</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone 4 -->
+            <div class="iphone-mockup mockup-4">
+                <div class="iphone-screen">
+                    <div class="screenshot-container">
+                        <img src="4.png" alt="FitSensei Screenshot 4" class="screenshot" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-text" style="display: none;">Analytics</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone 5 -->
+            <div class="iphone-mockup mockup-5">
+                <div class="iphone-screen">
+                    <div class="screenshot-container">
+                        <img src="5.png" alt="FitSensei Screenshot 5" class="screenshot" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-text" style="display: none;">Profile</div>
                     </div>
                 </div>
             </div>
@@ -86,6 +117,128 @@
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Version - Carousel -->
+        <div class="phone-carousel-mobile">
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active">
+                        <div class="iphone-mockup">
+                            <div class="iphone-screen">
+                                <div class="status-bar">
+                                    <span>9:41</span>
+                                    <span>🔋100%</span>
+                                </div>
+                                <div class="screenshot-container">
+                                    <img src="1.png" alt="FitSensei Screenshot 1" class="screenshot" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="fallback-text" style="display: none;">Dashboard</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <div class="iphone-mockup">
+                            <div class="iphone-screen">
+                                <div class="status-bar">
+                                    <span>9:41</span>
+                                    <span>🔋100%</span>
+                                </div>
+                                <div class="screenshot-container">
+                                    <img src="2.png" alt="FitSensei Screenshot 2" class="screenshot" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="fallback-text" style="display: none;">Workouts</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <div class="iphone-mockup">
+                            <div class="iphone-screen">
+                                <div class="status-bar">
+                                    <span>9:41</span>
+                                    <span>🔋100%</span>
+                                </div>
+                                <div class="screenshot-container">
+                                    <img src="3.png" alt="FitSensei Screenshot 3" class="screenshot" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="fallback-text" style="display: none;">Progress</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <div class="iphone-mockup">
+                            <div class="iphone-screen">
+                                <div class="status-bar">
+                                    <span>9:41</span>
+                                    <span>🔋100%</span>
+                                </div>
+                                <div class="screenshot-container">
+                                    <img src="4.png" alt="FitSensei Screenshot 4" class="screenshot" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="fallback-text" style="display: none;">Analytics</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="carousel-slide">
+                        <div class="iphone-mockup">
+                            <div class="iphone-screen">
+                                <div class="status-bar">
+                                    <span>9:41</span>
+                                    <span>🔋100%</span>
+                                </div>
+                                <div class="screenshot-container">
+                                    <img src="5.png" alt="FitSensei Screenshot 5" class="screenshot" 
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="fallback-text" style="display: none;">Profile</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn" onclick="changeSlide(-1)">‹</button>
+                    <div class="carousel-dots">
+                        <span class="dot active" onclick="goToSlide(0)"></span>
+                        <span class="dot" onclick="goToSlide(1)"></span>
+                        <span class="dot" onclick="goToSlide(2)"></span>
+                        <span class="dot" onclick="goToSlide(3)"></span>
+                        <span class="dot" onclick="goToSlide(4)"></span>
+                    </div>
+                    <button class="carousel-btn next-btn" onclick="changeSlide(1)">›</button>
+                </div>
+            </div>
+
+            <div class="running-figure-mobile">
+                <div class="runner-body">
+                    <div class="runner-head"></div>
+                    <div class="runner-torso"></div>
+                    <div class="runner-arm left"></div>
+                    <div class="runner-arm right"></div>
+                    <div class="runner-leg left"></div>
+                    <div class="runner-leg right"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>Need Support?</h3>
+        <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
+        <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
     </div>
 
     <script src="script.js"></script>
