@@ -73,7 +73,26 @@ body {
     50% { transform: scale(1.1); }
 }
 
-.nav-links {
+/* Nav links aligned with icons */
+.nav-links a {
+    display: flex;
+    align-items: center;   /* vertically align icon + text */
+    gap: 6px;              /* spacing between icon and text */
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.nav-links a:hover {
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+/* .nav-links {
     display: flex;
     gap: 2rem;
 }
@@ -91,7 +110,7 @@ body {
     color: #4CAF50;
     background: rgba(76, 175, 80, 0.1);
     transform: translateY(-2px);
-}
+} */
 
 .container {
     max-width: 1200px;
@@ -628,51 +647,49 @@ body {
     transition: color 0.3s;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .logo {
-        font-size: 1.4rem;
-    }
 
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 0.3rem 0.7rem;
-    }
+/* Navbar links with icons aligned */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* space between links */
 }
 
-@media (max-width: 480px) {
-    .nav-links {
-        gap: 0.5rem;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    .nav-links a {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.6rem;
-    }
+.nav-links a {
+    display: flex;
+    align-items: center;   /* align icon + text in the middle */
+    gap: 6px;              /* spacing between icon and text */
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
 }
-/* Show icons only on mobile */
+
+.nav-links a:hover {
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Icon styling */
 .nav-icon {
-    display: none;
-    font-size: 1.2rem;
+    font-size: 1rem;  /* smaller on desktop */
+    transition: color 0.3s, transform 0.2s;
 }
 
+.nav-links a:hover .nav-icon {
+    color: #4CAF50;
+    transform: scale(1.1);
+}
+
+/* Mobile: show only icons */
 @media (max-width: 768px) {
     .nav-text {
-        display: none; /* hide text */
+        display: none;
     }
     .nav-icon {
-        display: inline; /* show icon */
-    }
-    .nav-links a {
-        padding: 0.4rem 0.6rem;
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* slightly bigger on mobile */
     }
 }
