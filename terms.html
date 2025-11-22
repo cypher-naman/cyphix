@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Terms and Conditions - FitSensei</title>
+
+    <!-- App-review friendly meta -->
+    <meta name="description" content="FitSensei Terms & Conditions — on-device HealthKit reads, local storage, optional anonymized analytics, and app usage rules." />
+    <meta name="keywords" content="HealthKit, On-Device, Privacy, Terms, Fitness, Analytics, Crash Logs, De-identified, Data Use, Consent" />
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        /* Page-specific styles */
+        /* Page-specific styles (kept from original) */
+        :root{
+            --green:#4CAF50;
+            --bg:#0b0b0b;
+            --text:#fff;
+        }
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family: Inter, "Segoe UI", Roboto, -apple-system, system-ui, sans-serif;
+            margin:0;
+            padding:28px;
+        }
+        .container{
+            max-width:1000px;
+            margin:0 auto;
+            padding:28px;
+            background:rgba(255,255,255,0.03);
+            border-radius:12px;
+            box-shadow:0 6px 24px rgba(0,0,0,0.6);
+        }
         .content-page {
             color: white;
             line-height: 1.7;
@@ -22,7 +47,7 @@
         .content-page h2 {
             margin-top: 2rem;
             margin-bottom: 1rem;
-            color: #4CAF50;
+            color: var(--green);
         }
 
         .content-page ul {
@@ -40,7 +65,7 @@
             margin-bottom: 2rem;
             padding: 10px 20px;
             background: white;
-            color: #4CAF50;
+            color: var(--green);
             border-radius: 30px;
             font-size: 0.95rem;
             text-decoration: none;
@@ -49,14 +74,14 @@
         }
 
         .back-button:hover {
-            background: #4CAF50;
+            background: var(--green);
             color: white;
             box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
         }
 
         /* Make links green inside content */
         .content-page a {
-            color: #4CAF50;
+            color: var(--green);
             text-decoration: none;
             font-weight: 500;
         }
@@ -64,97 +89,109 @@
         .content-page a:hover {
             text-decoration: underline;
         }
+
+        .footer{
+            max-width:1000px;
+            margin:18px auto 0;
+            color:rgba(255,255,255,0.85);
+            text-align:center;
+        }
+
+        @media (max-width:680px){
+            body{padding:16px}
+            .container{padding:18px}
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo">
-                <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+    <nav class="navbar" aria-label="Main navigation" style="margin-bottom:18px;">
+        <div class="nav-content" style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+            <div class="logo" style="display:flex;align-items:center;gap:10px;color:white;font-weight:600">
+                <img src="logo.png" alt="FitSensei Logo" class="logo-img" style="width:36px;height:36px;border-radius:6px;object-fit:cover">
                 FitSensei
             </div>
-            <div class="nav-links">
-                <a href="index.html">
+            <div class="nav-links" style="display:flex;gap:12px;align-items:center;">
+                <a href="index.html" style="color:rgba(255,255,255,0.9);text-decoration:none;">
                     <span class="nav-text">Home</span>
-                    <i class="fas fa-home nav-icon"></i>
+                    <i class="fas fa-home nav-icon" style="margin-left:6px"></i>
                 </a>
-                <a href="privacy.html">
+                <a href="privacy.html" style="color:rgba(255,255,255,0.9);text-decoration:none;">
                     <span class="nav-text">Privacy Policy</span>
-                    <i class="fas fa-lock nav-icon"></i>
+                    <i class="fas fa-lock nav-icon" style="margin-left:6px"></i>
                 </a>
-                <a href="terms.html">
+                <a href="terms.html" style="color:var(--green);text-decoration:none;font-weight:600;">
                     <span class="nav-text">Terms & Conditions</span>
-                    <i class="fas fa-file-contract nav-icon"></i>
+                    <i class="fas fa-file-contract nav-icon" style="margin-left:6px"></i>
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" role="main" aria-label="FitSensei Terms and Conditions">
         <div class="hero">
-             <a href="index.html" class="back-button">← Back to Home</a>
-            <h1>Terms and Conditions</h1>
-            <p>Please read these terms carefully before using FitSensei</p>
+             <a href="index.html" class="back-button" aria-label="Back to Home">← Back to Home</a>
+            <h1 style="margin-top:0;color:var(--green);">Terms and Conditions</h1>
+            <p style="margin-top:6px;color:rgba(255,255,255,0.85)">Please read these terms carefully before using FitSensei.</p>
         </div>
 
         <div class="content-page">
             <h2>Acceptance of Terms</h2>
-            <p>By downloading, installing, or using the FitSensei mobile application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our app.</p>
+            <p>By downloading, installing, or using the FitSensei mobile application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the app.</p>
 
             <h2>Description of Service</h2>
-            <p>FitSensei is an AI-powered fitness tracking application that helps users monitor their workouts, track health metrics, and achieve their fitness goals. The app provides features including:</p>
-            <ul>
-                <li>AI-powered workout recommendations and coaching</li>
-                <li>Comprehensive workout tracking and logging</li>
-                <li>Health metrics monitoring and analysis</li>
-                <li>Progress visualization and analytics</li>
-                <li>Personalized fitness insights and guidance</li>
-                <li>Social features for connecting with other users</li>
-            </ul>
+            <p>FitSensei is a fitness tracking application that helps users monitor workouts and health metrics and view related insights. The app reads Health data from Apple Health (HealthKit) only with your explicit permission and displays that data on your device.</p>
+
+            <h2>On-Device Analysis & Automated Features</h2>
+            <p>FitSensei does not perform any AI tasks on your data at this time. In the future we may add optional, on-device analysis or processing features (for example: trend detection, suggestions, or local model inference). Any such features will run on the device unless explicitly stated otherwise and you will be informed in the app when enabling them.</p>
 
             <h2>User Accounts</h2>
-            <p>To access certain features of FitSensei, you must create an account. You are responsible for:</p>
-            <ul>
-                <li>Maintaining the confidentiality of your account credentials</li>
-                <li>All activities that occur under your account</li>
-                <li>Providing accurate and complete information</li>
-                <li>Updating your information to keep it current</li>
-            </ul>
+            <p>User accounts may be automatically created by the app to provide app features. Creating an account does not mean FitSensei uploads your HealthKit or personal health data to our servers. Currently, no HealthKit or personally-identifying health data is transmitted off-device.</p>
+            <p>Deleting the app from your device may remove app data and cached content stored locally. Cyphix is not responsible for any user data loss that occurs when you delete the app or remove local storage; if you need assistance retrieving data prior to deleting the app, contact support at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a>.</p>
+
+            <h2>Social & External Links</h2>
+            <p>FitSensei does not provide built-in user-to-user social networking. Where applicable, users may connect to FitSensei's public social accounts (for example Instagram, X, Threads) via links provided in the app. Any interactions on third-party social platforms are governed by those platforms' terms and privacy policies.</p>
 
             <h2>Acceptable Use</h2>
             <p>You agree to use FitSensei only for lawful purposes and in accordance with these Terms. You agree not to:</p>
             <ul>
-                <li>Use the app in any way that violates applicable laws or regulations</li>
-                <li>Share false or misleading health information</li>
-                <li>Attempt to gain unauthorized access to the app or its related systems</li>
-                <li>Interfere with or disrupt the app's functionality</li>
-                <li>Use the AI features for purposes other than fitness guidance</li>
+                <li>Use the app in any way that violates applicable laws or regulations.</li>
+                <li>Share false or misleading health information through any means the app provides (e.g., comments to our public channels).</li>
+                <li>Attempt to gain unauthorized access to the app, its systems, or other users' data.</li>
+                <li>Interfere with or disrupt the app's functionality or attempts to reverse-engineer app components.</li>
             </ul>
 
             <h2>Health Disclaimer</h2>
-            <p>FitSensei is designed to help you track your fitness activities and should not be used as a substitute for professional medical advice. The AI recommendations are for informational purposes only. Always consult with a healthcare professional before beginning any exercise program.</p>
+            <p>FitSensei is designed to help you track fitness activities and should not be used as a substitute for professional medical advice. Information and any automated insights provided by the app are for informational purposes only. Always consult a healthcare professional before beginning a new exercise program or making changes to your health routine.</p>
 
             <h2>Intellectual Property</h2>
-            <p>All content, features, and functionality of FitSensei, including but not limited to text, graphics, logos, AI algorithms, and software, are owned by Cyphix and are protected by copyright, trademark, and other intellectual property laws.</p>
+            <p>All content, features, and functionality of FitSensei, including but not limited to text, graphics, logos, software, and service workflows, are owned by Cyphix and are protected by copyright, trademark, and other intellectual property laws.</p>
 
             <h2>Limitation of Liability</h2>
-            <p>FitSensei and Cyphix shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the app or any content therein.</p>
+            <p>To the fullest extent permitted by applicable law, FitSensei and Cyphix shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the app or reliance on any information it provides. If applicable law does not allow the exclusion or limitation of liability, liability shall be limited to the maximum extent permitted by law.</p>
 
-            <h2>Termination</h2>
-            <p>We may terminate or suspend your account and access to the app immediately, without prior notice, for any breach of these Terms and Conditions.</p>
+            <h2>Termination & Service Discontinuation</h2>
+            <p>We may suspend or terminate access to the app for users who violate these Terms. Additionally, we may discontinue the app entirely (for example, due to insufficient user base, lack of financial viability, or other business reasons). If we discontinue the service, we will post notice on our website and within the app where feasible. We are not liable for losses resulting from discontinuation.</p>
 
             <h2>Changes to Terms</h2>
-            <p>We reserve the right to modify these Terms and Conditions at any time. We will notify users of any significant changes through the app or via email.</p>
+            <p>We reserve the right to modify these Terms and Conditions at any time. Updated terms will be posted on our website. We will not send email notifications for every update; it is your responsibility to review the latest Terms at <a href="https://www.cyphix.org/terms.html">https://www.cyphix.org/terms.html</a> (or the in-app link). Continued use of the app after posting indicates acceptance of the revised Terms.</p>
+
+            <h2>Data, Privacy & Analytics</h2>
+            <p>FitSensei reads HealthKit data only with your permission and displays it on-device. We do not upload or share HealthKit data to our servers. Optionally, users may opt-in to anonymized analytics or crash reporting; any such data will be de-identified and will not be tied to your identity. For more details, see our <a href="privacy.html">Privacy Policy</a>.</p>
+
+            <h2>Governing Law</h2>
+            <p>These Terms are governed by and construed in accordance with the laws of the jurisdiction where Cyphix is incorporated, without regard to conflict of law provisions. If any provision of these Terms is held invalid or unenforceable, that provision will be enforced to the maximum extent permissible and the remaining provisions will remain in full force and effect.</p>
 
             <h2>Contact Information</h2>
-            <p>For questions about these Terms and Conditions, please contact us at <a href="mailto:support@cyphix.org">support@cyphix.org</a></p>
-            
-            <p><em>Last updated: September 2025</em></p>
+            <p>For questions about these Terms, support, or data requests, contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a>.</p>
+
+            <p style="margin-top:1.2rem;opacity:0.9">Last updated: <strong>November 22, 2025</strong></p>
+
+            <p style="margin-top:12px;font-size:0.95rem;color:rgba(255,255,255,0.8);"><em>Note:</em> This document is intended to be clear and reviewer-friendly for app stores and users. It is not legal advice. If you require a jurisdiction-specific or legally certified terms document, consult a qualified attorney.</p>
         </div>
     </div>
 
     <div class="footer">
-        <h3>Need Support?</h3>
+        <h3 style="margin-bottom:6px;color:var(--green)">Need Support?</h3>
         <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
         <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
     </div>

@@ -92,49 +92,89 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" role="main" aria-label="FitSensei privacy policy">
         <div class="hero">
-             <a href="index.html" class="back-button">← Back to Home</a>
-            <h1>Privacy Policy</h1>
-            <p>Learn how FitSensei protects and uses your data</p>
+        <a href="index.html" class="back-button" aria-label="Back to Home">← Back to Home</a>
+        <div>
+            <h1>Privacy & HealthKit Policy</h1>
+            <p class="lead">How FitSensei accesses, stores, and uses Health and fitness data on your device.</p>
+        </div>
         </div>
 
-        <div class="content-page">
-            <h2>Information We Collect</h2>
-            <p>FitSensei collects information you provide directly to us, such as when you create an account, update your profile, or contact us for support. This includes:</p>
-            <ul>
-                <li>Personal information (name, email address, date of birth)</li>
-                <li>Fitness data (workout history, health metrics, progress tracking)</li>
-                <li>Device information (device type, operating system version)</li>
-                <li>Usage information (app features used, time spent in app)</li>
-            </ul>
+        <section class="content-page" aria-labelledby="info-collect">
+        <h2 id="info-collect">Information We Collect</h2>
+        <p>FitSensei accesses Health & Fitness data from Apple Health (HealthKit) only with your explicit iOS permission. We currently read data on the device to display within the app. Types of data the app may request access to include (examples):</p>
 
-            <h2>How We Use Your Information</h2>
-            <p>We use the information we collect to:</p>
-            <ul>
-                <li>Provide, maintain, and improve our fitness tracking services</li>
-                <li>Personalize your workout recommendations using AI</li>
-                <li>Send you important updates about your account and the app</li>
-                <li>Respond to your questions and provide customer support</li>
-                <li>Analyze app usage to enhance user experience</li>
-            </ul>
+        <ul>
+            <li>Activity & workouts (HKWorkout)</li>
+            <li>Heart rate and heart-related metrics (HKQuantityTypeIdentifierHeartRate)</li>
+            <li>Sleep analysis (HKCategoryTypeIdentifierSleepAnalysis)</li>
+            <li>Steps, distance, and calories</li>
+            <li>Other health metrics you explicitly grant access to</li>
+        </ul>
 
-            <h2>Data Security</h2>
-            <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. Your fitness data is encrypted and stored securely on our servers.</p>
-
-            <h2>Data Sharing</h2>
-            <p>We do not sell, trade, or share your personal information with third parties except as described in this policy. We may share aggregated, non-identifiable information for research and analytics purposes.</p>
-
-            <h2>Your Rights</h2>
-            <p>You have the right to access, update, or delete your personal information at any time through your account settings. You may also contact us directly for assistance with your data rights.</p>
-
-            <h2>Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
-            
-            <p><em>Last updated: September 2025</em></p>
+        <div class="summary" aria-hidden="false">
+            <strong>Data Use Summary (short — for App Review)</strong>
+            <table class="data-table" role="table" aria-label="Data use summary">
+            <thead>
+                <tr><th>Data category</th><th>Use</th><th>Shared off device?</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>HealthKit / Health data</td><td>Displayed in-app, used for local features and analytics opt-in only</td><td>No — stored only on user device</td></tr>
+                <tr><td>Device & usage info</td><td>Local app behavior, optional aggregated analytics</td><td>Only if you opt-in to anonymized analytics</td></tr>
+                <tr><td>Crash logs</td><td>Optional anonymous crash reports (no identity)</td><td>Only if enabled and anonymized</td></tr>
+            </tbody>
+            </table>
         </div>
+
+        <h2>How We Use Your Information</h2>
+        <p>We use data strictly to provide and improve the app experience. Specifically:</p>
+        <ul>
+            <li>Display your health & fitness metrics inside the app (on-device).</li>
+            <li>Enable features like workout history, sleep charts, trends, and personalized suggestions — processed locally where possible.</li>
+            <li>With explicit opt-in from you, collect anonymized, aggregated analytics and crash logs to improve app stability and features. These analytics do <strong>not</strong> include any personal identifiers or links to your identity.</li>
+        </ul>
+
+        <h2>Important: On-device storage & HealthKit</h2>
+        <p><strong>FitSensei does not transmit HealthKit or other personal health data to our servers.</strong> All HealthKit reads and derived displays happen on the device. If we ever change this behaviour, we will update this policy and ask for explicit consent before enabling any cloud sync or upload of health data.</p>
+
+        <h2>Analytics & Crash Reporting (Optional)</h2>
+        <p>We may request an opt-in to gather aggregated analytics and anonymous crash reports to improve the app. If enabled:</p>
+        <ul>
+            <li>Data is de-identified/aggregated and is not linked to your account or identity.</li>
+            <li>We never include raw HealthKit health data tied to a user identity in analytics.</li>
+            <li>You can opt out at any time from within the app settings.</li>
+        </ul>
+
+        <h2>Data Security & Retention</h2>
+        <p>We follow industry best practices to protect data on the device. Because HealthKit data is read from the Health app and displayed locally, FitSensei keeps only the minimum derived data required for UI features. If analytics are enabled, aggregated summaries are kept only as long as needed to improve the product.</p>
+
+        <h2>Data Sharing & Third Parties</h2>
+        <p>We do not sell, trade, or share HealthKit or personal information with third parties. We may use third-party services for analytics or crash reporting (only after you opt-in). Any such service will receive only anonymized, non-identifying data and will be contractually required to follow data minimization and security practices.</p>
+
+        <h2>Your Rights & Controls</h2>
+        <ul>
+            <li><strong>Health data permissions:</strong> You control which HealthKit data FitSensei can read via the iOS Health app or iOS Settings → Health → Data Access & Devices. Revoke access any time.</li>
+            <li><strong>Opt-out:</strong> You can disable any optional analytics/crash reporting in FitSensei’s in-app settings.</li>
+            <li><strong>Delete local data:</strong> To remove local app data, use the app's account/settings screen (if applicable) or delete the app — this removes app data stored on-device. Contact us for assistance if needed.</li>
+        </ul>
+
+        <h2>Changes to this Policy</h2>
+        <p>We may update this policy when we add features or change how data is handled. If we introduce cloud sync or server storage of health data, we will ask for explicit consent and clearly explain what is uploaded and how it is protected.</p>
+
+        <h2>Contact & Data Requests</h2>
+        <p>If you have questions or wish to exercise your rights (access, correction, deletion), email us at <a class="contact" href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a>.</p>
+
+        <div class="note" role="note">
+            <strong>Developer note for App Review:</strong> This app uses <em>HealthKit</em> only for on-device reads and display. No HealthKit data is uploaded to our servers. Optional analytics/crash reporting are anonymized and opt-in.
+        </div>
+
+        <footer>
+            <p>Last updated: <strong><!-- Insert date of publish --></strong></p>
+            <p>FitSensei — Built with privacy-first design.</p>
+        </footer>
+        </section>
     </div>
-
     <div class="footer">
         <h3>Need Support?</h3>
         <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
