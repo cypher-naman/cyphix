@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Donate — FitSensei</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        .donate-hero {
+            padding-top: 4rem; /* navbar spacing fix */
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .green-email {
+            color: var(--main-color, #64D370);
+            font-weight: 700;
+        }
+
+        /* 2x2 GRID for donation tiles */
+        .donation-grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 650px) {
+            .donation-grid-2x2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* donation card tweaks for equal tiles */
+        .donation-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+            padding: 18px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .donation-logo {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            padding: 8px;
+        }
+
+        .donation-card h3 {
+            margin: 0;
+        }
+
+        .donation-card p {
+            margin-top: 6px;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.95rem;
+        }
+
+        .donate-btn {
+            background: var(--secondary, #3BEB54);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            color: #001;
+            cursor: pointer;
+        }
+
+        /* perks box */
+        .donation-perks {
+            margin-top: 2rem;
+        }
+
+        .donation-perks ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .donation-perks li {
+            margin: 10px 0;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .donation-contact {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1rem;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+                <img src="fitsensei-text.png" alt="FitSensei" class="brand-image">
+            </div>
+
+            <div class="nav-links">
+                <a href="home.html"><i class="fas fa-home nav-icon"></i><span class="nav-text">Home</span></a>
+                <a href="privacy.html"><i class="fas fa-lock nav-icon"></i><span class="nav-text">Privacy</span></a>
+                <a href="terms.html"><i class="fas fa-file-contract nav-icon"></i><span class="nav-text">Terms</span></a>
+                <a href="donate.html" aria-current="page"><i class="fas fa-hand-holding-heart nav-icon"></i><span class="nav-text">Donate</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="donate-page container">
+        
+        <!-- HERO SECTION -->
+        <header class="donate-hero">
+            <h1>Support FitSensei</h1>
+            <p>Your contribution helps make FitSensei faster, more stable, and feature-rich — all while staying ad-light and privacy-focused.</p>
+        </header>
+
+        <!-- 2 × 2 Donation Grid -->
+        <section class="donation-grid-2x2">
+            
+            <a class="donation-card paypal" href="https://www.paypal.com/donate/YOUR_PAYPAL_LINK" target="_blank">
+                <img src="paypal.png" alt="PayPal" class="donation-logo">
+                <h3>PayPal</h3>
+                <p>One-time or recurring secure support via PayPal.</p>
+                <button class="donate-btn">Support</button>
+            </a>
+
+            <a class="donation-card bmc" href="https://www.buymeacoffee.com/YOUR_BMAC_USERNAME" target="_blank">
+                <img src="bmc.png" alt="Buy Me a Coffee" class="donation-logo">
+                <h3>Buy Me a Coffee</h3>
+                <p>A quick way to say thanks with a small tip.</p>
+                <button class="donate-btn">Support</button>
+            </a>
+
+            <a class="donation-card kofi" href="https://ko-fi.com/YOUR_KOFI_USERNAME" target="_blank">
+                <img src="kofi.png" alt="Ko-fi" class="donation-logo">
+                <h3>Ko-fi</h3>
+                <p>Flexible, simple one-time support or memberships.</p>
+                <button class="donate-btn">Support</button>
+            </a>
+
+            <a class="donation-card patreon" href="https://www.patreon.com/YOUR_PATREON_USERNAME" target="_blank">
+                <img src="patreon.png" alt="Patreon" class="donation-logo">
+                <h3>Patreon</h3>
+                <p>Become a monthly supporter and help shape FitSensei.</p>
+                <button class="donate-btn">Support</button>
+            </a>
+
+        </section>
+
+        <!-- PERKS -->
+        <section class="donation-perks section-glass">
+            <h4>Perks for supporters</h4>
+            <ul>
+                <li>Ad-free experience inside the app</li>
+                <li>Option to request features or get bug fixes prioritized</li>
+            </ul>
+        </section>
+
+        <!-- CONTACT NOTE -->
+        <section class="donation-contact">
+            Let us know which payment method you'd like via email at 
+            <span class="green-email">fitsensei@cyphix.org</span>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="donate-footer" style="margin-top: 2rem; text-align:center; opacity:0.85;">
+            © 2025 FitSensei by Cyphix. All rights reserved.
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

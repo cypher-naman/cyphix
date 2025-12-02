@@ -1,16 +1,31 @@
+/* ============================
+   styles.css (updated)
+   ============================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d5016 100%);
-    min-height: 100vh;
-    overflow-x: hidden;
+:root{
+    --main-color: #64D370;
+    --secondary: #3BEB54;
+    --bg-1: #000000;
+    --bg-2: #1a1a1a;
+    --bg-3: #2d5016;
 }
 
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #fff;
+    -webkit-font-smoothing:antialiased;
+}
+
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -35,90 +50,81 @@ body {
     margin: 0 auto;
 }
 
+/* Logo area: logo image + brand image (text image) */
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #4CAF50;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     transition: transform 0.3s ease;
 }
 
 .logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .logo-img {
-    height: 32px;
-    width: auto;
-    border-radius: 6px;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-/* .logo-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+/* The brand-image replaces the text to the right of icon */
+.brand-image {
+    height: 34px;
+    object-fit: cover;
+    border-radius: 8px;           /* rounded corners as requested */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Nav links */
+.nav-links {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    animation: pulse 2s infinite;
-} */
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    gap: 1.25rem;
 }
 
-/* Nav links aligned with icons */
 .nav-links a {
     display: flex;
     align-items: center;   /* vertically align icon + text */
-    gap: 6px;              /* spacing between icon and text */
-    color: white;
+    gap: 8px;              /* spacing between icon and text */
+    color: #ddd;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.28s ease;
     position: relative;
-    padding: 0.5rem 1rem;
+    padding: 0.45rem 0.9rem;
     border-radius: 20px;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
-    color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
+    color: var(--main-color);
+    background: rgba(76, 175, 80, 0.07);
     transform: translateY(-2px);
 }
 
-/* .nav-links {
-    display: flex;
-    gap: 2rem;
+/* Icon styling inside links */
+.nav-icon {
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s;
-    position: relative;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+.nav-links a:hover .nav-icon {
+    color: var(--main-color);
+    transform: scale(1.1);
 }
 
-.nav-links a:hover {
-    color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
-    transform: translateY(-2px);
-} */
-
+/* Container spacing */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 120px 2rem 60px;
 }
 
-/* Home Page Styles */
+/* ============================
+   Home Page / Hero
+   ============================ */
 .hero {
     text-align: center;
     color: white;
@@ -127,18 +133,12 @@ body {
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #4CAF50, #81C784, #4CAF50);
     background-size: 200% 200%;
@@ -149,15 +149,15 @@ body {
 }
 
 @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%,100% { background-position: 0% 50%; }
+    50%    { background-position: 100% 50%; }
 }
 
 .hero p {
-    font-size: 1.3rem;
-    opacity: 0.9;
+    font-size: 1.12rem;
+    opacity: 0.95;
     margin-bottom: 2rem;
-    max-width: 600px;
+    max-width: 680px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -165,62 +165,65 @@ body {
 .cta-button {
     background: linear-gradient(45deg, #4CAF50, #66BB6A);
     color: white;
-    padding: 15px 40px;
+    padding: 12px 36px;
     border: none;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    transition: all 0.28s;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.28);
     position: relative;
     overflow: hidden;
 }
 
+/* shiny stripe on CTA */
 .cta-button::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
+    left: -120%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s;
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(76, 175, 80, 0.42);
 }
 
 .cta-button:hover::before {
-    left: 100%;
+    left: 120%;
 }
 
-/* Desktop Mockups - All 5 phones */
+/* ============================
+   Phone mockups (desktop)
+   ============================ */
 .phone-mockups-desktop {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* align top instead of center */
-    flex-wrap: wrap; /* allow wrapping if screen is small */
+    align-items: flex-start;
+    flex-wrap: wrap;
     position: relative;
-    margin: 4rem 0;
-    gap: 30px; /* space between mockups */
-    height: auto; /* remove fixed height */
+    margin: 3.25rem 0;
+    gap: 30px;
+    height: auto;
 }
-
 
 .phone-carousel-mobile {
     display: none;
 }
 
-/* Realistic iPhone Mockup */
+/* realistic iPhone mockup */
 .iphone-mockup {
     width: 180px;
     height: 368px;
     background: linear-gradient(145deg, #2c2c2c, #000);
     border-radius: 25px;
     position: relative;
-    box-shadow: 
+    box-shadow:
         0 0 0 1px #333,
         0 0 0 4px #000,
         0 12px 24px rgba(0, 0, 0, 0.4),
@@ -231,89 +234,11 @@ body {
 
 .iphone-mockup:hover {
     transform: scale(1.05) !important;
-    box-shadow: 
-        0 0 0 1px #4CAF50,
+    box-shadow:
+        0 0 0 1px var(--main-color),
         0 0 0 4px #000,
-        0 15px 30px rgba(76, 175, 80, 0.3),
-        0 30px 60px rgba(0, 0, 0, 0.4);
-}
-
-.mockup-1 {
-    transform: rotate(-8deg) translateY(-15px);
-    animation: float1 6s ease-in-out infinite;
-}
-
-.mockup-2 {
-    transform: rotate(3deg) translateY(8px);
-    z-index: 3;
-    animation: float2 6s ease-in-out infinite;
-}
-
-.mockup-3 {
-    transform: rotate(-5deg) translateY(-8px);
-    animation: float3 6s ease-in-out infinite;
-}
-
-.mockup-4 {
-    transform: rotate(6deg) translateY(12px);
-    animation: float4 6s ease-in-out infinite;
-}
-
-.mockup-5 {
-    transform: rotate(-3deg) translateY(-12px);
-    animation: float5 6s ease-in-out infinite;
-}
-
-@keyframes float1 {
-    0%, 100% { transform: rotate(-8deg) translateY(-15px); }
-    50% { transform: rotate(-6deg) translateY(-20px); }
-}
-
-@keyframes float2 {
-    0%, 100% { transform: rotate(3deg) translateY(8px); }
-    50% { transform: rotate(5deg) translateY(0px); }
-}
-
-@keyframes float3 {
-    0%, 100% { transform: rotate(-5deg) translateY(-8px); }
-    50% { transform: rotate(-3deg) translateY(-15px); }
-}
-
-@keyframes float4 {
-    0%, 100% { transform: rotate(6deg) translateY(12px); }
-    50% { transform: rotate(8deg) translateY(5px); }
-}
-
-@keyframes float5 {
-    0%, 100% { transform: rotate(-3deg) translateY(-12px); }
-    50% { transform: rotate(-1deg) translateY(-18px); }
-}
-
-/* iPhone Camera Notch */
-.iphone-mockup::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75px;
-    height: 18px;
-    background: #000;
-    border-radius: 0 0 10px 10px;
-    z-index: 2;
-}
-
-/* Home Indicator */
-.iphone-mockup::after {
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 75px;
-    height: 3px;
-    background: #666;
-    border-radius: 2px;
+        0 15px 30px rgba(76, 175, 80, 0.26),
+        0 30px 60px rgba(0, 0, 0, 0.45);
 }
 
 .iphone-screen {
@@ -332,7 +257,7 @@ body {
 .screenshot-container {
     flex: 1;
     width: 100%;
-    height: 100%; /* was calc(100% - 34px); */
+    height: 100%;
     overflow: hidden;
     background: linear-gradient(135deg, #4CAF50, #66BB6A);
     display: flex;
@@ -344,12 +269,12 @@ body {
     position: relative;
 }
 
-
 .screenshot {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
+    display: block;
 }
 
 .fallback-text {
@@ -362,7 +287,37 @@ body {
     font-weight: bold;
 }
 
-/* 3D Running Figure */
+/* floating icons */
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.78;
+    color: var(--main-color);
+    animation: float 4s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.45);
+}
+
+/* positions for floating icons (should match markup order) */
+.floating-icon:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+.floating-icon:nth-child(2) { top: 70%; right: 2%; animation-delay: 1s; }
+.floating-icon:nth-child(3) { bottom: 10%; left: 8%; animation-delay: 2s; }
+.floating-icon:nth-child(4) { top: 30%; left: 2%; animation-delay: 3s; }
+.floating-icon:nth-child(5) { top: 60%; right: 8%; animation-delay: 1.5s; }
+.floating-icon:nth-child(6) { bottom: 30%; right: 10%; animation-delay: 2.5s; }
+
+@keyframes float {
+    0%,100% { transform: translateY(0px) rotate(0deg); }
+    50%    { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* running figure */
 .running-figure {
     position: absolute;
     right: -60px;
@@ -379,172 +334,30 @@ body {
     z-index: 4;
 }
 
-.runner-body {
-    width: 50px;
-    height: 75px;
-    position: relative;
-    animation: run 2s ease-in-out infinite;
-}
-
+.runner-body { width: 50px; height: 75px; position: relative; animation: run 2s ease-in-out infinite; }
+/* ... runner child element styles retained (same as before) */
 .runner-head {
-    width: 15px;
-    height: 15px;
-    background: linear-gradient(45deg, #4CAF50, #66BB6A);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 15px; height: 15px; background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    border-radius: 50%; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+.runner-torso { width: 12px; height: 25px; background: linear-gradient(45deg, #66BB6A, #81C784);
+    position: absolute; top: 15px; left: 50%; transform: translateX(-50%); border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+.runner-arm { width: 9px; height: 18px; background: linear-gradient(45deg, #66BB6A, #81C784);
+    position: absolute; border-radius: 6px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+.runner-arm.left { top: 18px; left: 9px; transform: rotate(-20deg); animation: armSwing 2s ease-in-out infinite; }
+.runner-arm.right { top: 18px; right: 9px; transform: rotate(20deg); animation: armSwing 2s ease-in-out infinite reverse; }
+.runner-leg { width: 11px; height: 22px; background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    position: absolute; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+.runner-leg.left { bottom: 0; left: 15px; transform: rotate(10deg); animation: legSwing 2s ease-in-out infinite; }
+.runner-leg.right { bottom: 0; right: 15px; transform: rotate(-10deg); animation: legSwing 2s ease-in-out infinite reverse; }
 
-.runner-torso {
-    width: 12px;
-    height: 25px;
-    background: linear-gradient(45deg, #66BB6A, #81C784);
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 3px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
+@keyframes run { 0%,100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-55%) translateX(5px); } }
+@keyframes armSwing { 0%,100% { transform: rotate(-20deg);} 50% { transform: rotate(20deg);} }
+@keyframes legSwing { 0%,100% { transform: rotate(10deg);} 50% { transform: rotate(-30deg);} }
 
-.runner-arm {
-    width: 9px;
-    height: 18px;
-    background: linear-gradient(45deg, #66BB6A, #81C784);
-    position: absolute;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.runner-arm.left {
-    top: 18px;
-    left: 9px;
-    transform: rotate(-20deg);
-    animation: armSwing 2s ease-in-out infinite;
-}
-
-.runner-arm.right {
-    top: 18px;
-    right: 9px;
-    transform: rotate(20deg);
-    animation: armSwing 2s ease-in-out infinite reverse;
-}
-
-.runner-leg {
-    width: 11px;
-    height: 22px;
-    background: linear-gradient(45deg, #4CAF50, #66BB6A);
-    position: absolute;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.runner-leg.left {
-    bottom: 0;
-    left: 15px;
-    transform: rotate(10deg);
-    animation: legSwing 2s ease-in-out infinite;
-}
-
-.runner-leg.right {
-    bottom: 0;
-    right: 15px;
-    transform: rotate(-10deg);
-    animation: legSwing 2s ease-in-out infinite reverse;
-}
-
-@keyframes run {
-    0%, 100% {
-        transform: translateY(-50%) translateX(0);
-    }
-    50% {
-        transform: translateY(-55%) translateX(5px);
-    }
-}
-
-@keyframes armSwing {
-    0%, 100% {
-        transform: rotate(-20deg);
-    }
-    50% {
-        transform: rotate(20deg);
-    }
-}
-
-@keyframes legSwing {
-    0%, 100% {
-        transform: rotate(10deg);
-    }
-    50% {
-        transform: rotate(-30deg);
-    }
-}
-
-.floating-elements {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.floating-icon {
-    position: absolute;
-    font-size: 2rem;
-    opacity: 0.7;
-    color: #4CAF50;
-    animation: float 4s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-}
-
-.floating-icon:nth-child(1) {
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-.floating-icon:nth-child(2) {
-    top: 70%;
-    right: 2%;
-    animation-delay: 1s;
-}
-
-.floating-icon:nth-child(3) {
-    bottom: 10%;
-    left: 8%;
-    animation-delay: 2s;
-}
-
-.floating-icon:nth-child(4) {
-    top: 30%;
-    left: 2%;
-    animation-delay: 3s;
-}
-
-.floating-icon:nth-child(5) {
-    top: 60%;
-    right: 8%;
-    animation-delay: 1.5s;
-}
-
-.floating-icon:nth-child(6) {
-    bottom: 30%;
-    right: 10%;
-    animation-delay: 2.5s;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-    }
-}
-
-/* Mobile Carousel */
+/* Mobile Carousel (visible on small screens) */
 .carousel-container {
     position: relative;
     width: 100%;
@@ -564,67 +377,30 @@ body {
 
 .carousel-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transform: translateX(100%);
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0; transform: translateX(100%);
     transition: all 0.5s ease-in-out;
 }
 
-.carousel-slide.active {
-    opacity: 1;
-    transform: translateX(0);
-}
+.carousel-slide.active { opacity: 1; transform: translateX(0); }
+.carousel-slide.prev   { transform: translateX(-100%); }
 
-.carousel-slide.prev {
-    transform: translateX(-100%);
-}
-
-.carousel-controls {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
+.carousel-controls { display: flex; align-items: center; gap: 2rem; margin-top: 1.6rem; }
 
 .carousel-btn {
-    background: rgba(76, 175, 80, 0.2);
+    background: rgba(76, 175, 80, 0.12);
     border: 2px solid #4CAF50;
     color: #4CAF50;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s;
+    width: 50px; height: 50px; border-radius: 50%;
+    font-size: 24px; cursor: pointer; transition: all 0.25s;
 }
 
-.carousel-btn:hover {
-    background: #4CAF50;
-    color: white;
-    transform: scale(1.1);
-}
+.carousel-btn:hover { background: #4CAF50; color: white; transform: scale(1.07); }
 
-.carousel-dots {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(76, 175, 80, 0.3);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.dot.active {
-    background: #4CAF50;
-    transform: scale(1.2);
-}
+.carousel-dots { display: flex; gap: 0.5rem; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(76, 175, 80, 0.3); cursor: pointer; transition: all 0.25s; }
+.dot.active { background: #4CAF50; transform: scale(1.2); }
 
 /* Footer */
 .footer {
@@ -636,60 +412,287 @@ body {
     border-top: 1px solid rgba(76, 175, 80, 0.3);
 }
 
-.footer h3 {
-    color: #4CAF50;
-    margin-bottom: 1rem;
+.footer h3 { color: #4CAF50; margin-bottom: 1rem; }
+.footer a { color: #4CAF50; text-decoration: none; transition: color 0.3s; }
+
+/* ============================
+   Donate Page additions
+   ============================ */
+.donate-page { padding: 40px 16px; max-width: 1100px; margin: 0 auto; }
+.donate-header { text-align: center; margin-bottom: 28px; }
+.donation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 18px; }
+.donation-card {
+    display: flex; align-items: center; gap: 12px; padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    text-decoration: none; color: inherit;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+.donation-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
+.donation-logo { width: 64px; height: 64px; object-fit: contain; }
+.donation-info h3 { margin: 0 0 6px 0; font-size: 1.05rem; }
+.donate-btn {
+    margin-left: auto; background: var(--secondary); border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer;
+    color: #001; font-weight: 600;
 }
 
-.footer a {
-    color: #4CAF50;
-    text-decoration: none;
-    transition: color 0.3s;
+/* future options */
+.donation-future { margin-top: 28px; text-align:center; opacity:0.95; }
+.donate-footer { margin-top: 18px; text-align:center; font-size:0.93rem; opacity:0.85; }
+
+/* ============================
+   Ripple effect helper (ripple element styling)
+   ============================ */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
 }
 
+@keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+}
 
-/* Navbar links with icons aligned */
-.nav-links {
+/* ============================
+   Responsive adjustments
+   ============================ */
+@media (max-width: 992px) {
+    .hero h1 { font-size: 2.6rem; }
+    .brand-image { height: 30px; }
+}
+
+@media (max-width: 768px) {
+    .nav-text { display: none; }
+    .nav-icon { font-size: 1.2rem; }
+    .brand-image { height: 28px; }
+    .logo-img { height: 36px; width: 36px; }
+    .phone-mockups-desktop { display: none; }
+    .phone-carousel-mobile { display: block; margin-top: 1rem; }
+    .container { padding: 100px 1rem 40px; }
+}
+/* ===== Donate page styling (cleaned & refactored) ===== */
+
+/* Theme variables (fallbacks included) */
+:root {
+    --main-color: #64D370;
+    --secondary: #3BEB54;
+    --glass-start: rgba(255,255,255,0.02);
+    --glass-end:   rgba(255,255,255,0.01);
+    --muted-text: rgba(255,255,255,0.85);
+    --card-shadow: rgba(0,0,0,0.55);
+}
+
+/* Subtle glass surface used around donate sections */
+.section-glass {
+    background: linear-gradient(180deg, var(--glass-start), var(--glass-end));
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* HERO */
+.donate-hero {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.donate-hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #7CFF9A, var(--main-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.donate-hero p {
+    max-width: 880px;
+    margin: 0.25rem auto 1rem;
+    color: rgba(255,255,255,0.9);
+}
+
+/* CTA ghost variant */
+.donate-hero-cta { display: inline-flex; gap: 12px; margin-top: 12px; }
+.cta-button.ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #ddd;
+    padding: 10px 18px;
+}
+
+/* ---------------------------
+   Mockups grid (optional)
+   --------------------------- */
+.donation-visuals { margin: 18px 0 28px; }
+
+.phone-mockups-grid {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.phone-mockups-grid .iphone-mockup {
+    width: 120px;
+    height: 264px;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.32s ease, box-shadow 0.32s ease;
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.45),
+        inset 0 -20px 40px rgba(0,0,0,0.35);
+    background: linear-gradient(145deg, #111, #000);
+}
+.phone-mockups-grid .iphone-mockup:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+.phone-mockups-grid .iphone-screen {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
-    gap: 2rem; /* space between links */
+    justify-content: center;
+    background: #000;
+}
+.phone-mockups-grid .screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.nav-links a {
+/* ---------------------------
+   Donation cards layout
+   --------------------------- */
+
+/* Generic donation grid (responsive).
+   Use `.donation-grid-2x2` when you need fixed 2x2 tiles. */
+.donation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+/* 2x2 tile helper (preferred for donate page) */
+.donation-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+@media (max-width: 650px) {
+    .donation-grid-2x2 { grid-template-columns: 1fr; }
+}
+
+/* Card baseline: centered column layout so items (including button) are centered */
+.donation-card {
     display: flex;
-    align-items: center;   /* align icon + text in the middle */
-    gap: 6px;              /* spacing between icon and text */
-    color: white;
+    flex-direction: column;
+    align-items: center;      /* centers children horizontally */
+    text-align: center;
+    gap: 14px;
+    padding: 16px;
     text-decoration: none;
-    transition: all 0.3s;
-    position: relative;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    color: inherit;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.nav-links a:hover {
-    color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
-    transform: translateY(-2px);
+/* Hover lift */
+.donation-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
 }
 
-/* Icon styling */
-.nav-icon {
-    font-size: 1rem;  /* smaller on desktop */
-    transition: color 0.3s, transform 0.2s;
+/* Logo + text */
+.donation-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    padding: 8px;
+}
+.donation-card h3 { margin: 0; font-size: 1.05rem; }
+.donation-card p { margin: 6px 0 0; color: var(--muted-text); font-size: 0.95rem; }
+
+/* Platform accent stripes (subtle) */
+.donation-card.paypal  { border-left: 4px solid rgba(1, 62, 110, 0.9); }
+.donation-card.bmc     { border-left: 4px solid rgba(255, 138, 0, 0.9); }
+.donation-card.kofi    { border-left: 4px solid rgba(255, 85, 85, 0.9); }
+.donation-card.patreon { border-left: 4px solid rgba(255, 111, 97, 0.9); }
+
+/* Button: centered and compact */
+.donate-btn {
+    background: var(--secondary);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #001;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    align-self: center !important;     /* force centering */
+    margin: 0 auto !important;         /* avoid side offset */
+    display: inline-block;   
+}
+.donate-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,0.35); }
+
+/* Optional full-width variant for mobile */
+.donate-btn.full {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
 }
 
-.nav-links a:hover .nav-icon {
-    color: #4CAF50;
-    transform: scale(1.1);
+/* ---------------------------
+   Progress (kept tidy in case used)
+   --------------------------- */
+.progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.progress-header h4 { margin: 0; }
+.progress-header .muted { color: rgba(255,255,255,0.75); font-size: 0.95rem; margin-top: 6px; }
+.progress-amount { font-weight: 700; color: var(--main-color); }
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--main-color), var(--secondary));
+    width: 0;
+    transition: width 0.6s ease;
 }
 
-/* Mobile: show only icons */
+/* ---------------------------
+   Perks list
+   --------------------------- */
+.donation-perks { margin-top: 1rem; }
+.donation-perks ul { list-style: none; padding-left: 0; margin: 0; }
+.donation-perks li { margin: 8px 0; color: rgba(255,255,255,0.95); }
+
+/* ---------------------------
+   Responsive tweaks
+   --------------------------- */
 @media (max-width: 768px) {
-    .nav-text {
-        display: none;
-    }
-    .nav-icon {
-        font-size: 1.2rem; /* slightly bigger on mobile */
-    }
+    .phone-mockups-grid .iphone-mockup { width: 92px; height: 204px; }
+    .donation-grid { grid-template-columns: 1fr; }
+    .donate-hero h1 { font-size: 1.8rem; }
 }
+
+/* End of donate styling (cleaned) */
+
