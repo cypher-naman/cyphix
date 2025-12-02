@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* ============================
    styles.css (full replacement)
    ============================ */
@@ -20,6 +22,7 @@
 
 html, body { height: 100%; }
 
+/* Page base */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing:antialiased;
@@ -30,7 +33,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Make sure anchors/headers are visible under fixed nav */
+/* Ensure anchor targets are not hidden under the fixed navbar */
 html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 
 /* NAV */
@@ -65,13 +68,19 @@ html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 
 .hero h1 {
   font-size: 3.2rem; margin-bottom:.8rem;
-  background: linear-gradient(45deg,#4CAF50,#81C784); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background: linear-gradient(45deg,#4CAF50,#81C784);
+  background-size: 200% 200%;
+  /* vendor-prefixed then standard so linter won't complain */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   animation: gradientShift 3s ease-in-out infinite;
 }
 @keyframes gradientShift { 0%,100%{ background-position:0% 50% } 50%{ background-position:100% 50% } }
 
 .hero p { font-size:1.12rem; color: rgba(255,255,255,0.94); margin:0 auto 1.6rem; max-width:720px; }
 
+/* CTA */
 .cta-button {
   background: linear-gradient(45deg,#4CAF50,#66BB6A); color:#fff; padding:12px 36px; border-radius:50px; border:none;
   font-size:1.05rem; cursor:pointer; box-shadow: 0 6px 18px rgba(76,175,80,0.2); position:relative; overflow:hidden;
@@ -90,6 +99,7 @@ html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 .screenshot { width:100%; height:100%; object-fit:cover; display:block; }
 .fallback-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; font-weight:700; font-size:14px; display:none; }
 
+/* Floating decorative icons */
 .floating-elements { position:absolute; inset:0; pointer-events:none; }
 .floating-icon { position:absolute; font-size:2rem; color:var(--main-color); opacity:.8; text-shadow:0 0 10px rgba(76,175,80,0.45); animation: float 4s ease-in-out infinite; }
 @keyframes float { 0%,100%{ transform:translateY(0) rotate(0deg);} 50%{ transform:translateY(-18px) rotate(160deg);} }
