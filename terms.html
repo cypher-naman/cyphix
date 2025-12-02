@@ -15,27 +15,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
-        /* Page-specific styles (kept from original) */
+        /* Page-specific styles */
         :root{
             --green:#4CAF50;
             --bg:#0b0b0b;
             --text:#fff;
         }
-        body{
-            background:var(--bg);
-            color:var(--text);
-            font-family: Inter, "Segoe UI", Roboto, -apple-system, system-ui, sans-serif;
-            margin:0;
-            padding:28px;
-        }
-        .container{
-            max-width:1000px;
-            margin:0 auto;
-            padding:28px;
-            background:rgba(255,255,255,0.03);
-            border-radius:12px;
-            box-shadow:0 6px 24px rgba(0,0,0,0.6);
-        }
+
         .content-page {
             color: white;
             line-height: 1.7;
@@ -89,45 +75,36 @@
         .content-page a:hover {
             text-decoration: underline;
         }
-
-        .footer{
-            max-width:1000px;
-            margin:18px auto 0;
-            color:rgba(255,255,255,0.85);
-            text-align:center;
-        }
-
-        @media (max-width:680px){
-            body{padding:16px}
-            .container{padding:18px}
-        }
     </style>
 </head>
 <body>
-    <nav class="navbar" aria-label="Main navigation" style="margin-bottom:18px;">
-        <div class="nav-content" style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
-            <div class="logo" style="display:flex;align-items:center;gap:10px;color:white;font-weight:600">
-                <img src="logo.png" alt="FitSensei Logo" class="logo-img" style="width:36px;height:36px;border-radius:6px;object-fit:cover">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="home.html" aria-label="FitSensei home">
+                    <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+                </a>
                 <a href="home.html" aria-label="FitSensei">
                     <img src="fitsensei-text.png" alt="FitSensei" class="brand-image">
                 </a>
             </div>
-            <div class="nav-links" style="display:flex;gap:12px;align-items:center;">
-                <a href="home.html" style="color:rgba(255,255,255,0.9);text-decoration:none;">
+            
+            <div class="nav-links" role="menubar" aria-label="Site links">
+                <a href="home.html" role="menuitem">
+                    <i class="fas fa-home nav-icon" aria-hidden="true"></i>
                     <span class="nav-text">Home</span>
-                    <i class="fas fa-home nav-icon" style="margin-left:6px"></i>
                 </a>
-                <a href="donate.html">
+                <a href="donate.html" role="menuitem">
+                    <i class="fas fa-hand-holding-heart nav-icon" aria-hidden="true"></i>
                     <span class="nav-text">Donate</span>
-                    <i class="fas fa-hand-holding-heart nav-icon"></i>
                 </a>
-                <a href="privacy.html" style="color:rgba(255,255,255,0.9);text-decoration:none;">
-                    <span class="nav-text">Privacy Policy</span>
-                    <i class="fas fa-lock nav-icon" style="margin-left:6px"></i>
+                <a href="privacy.html" role="menuitem">
+                    <i class="fas fa-lock nav-icon" aria-hidden="true"></i>
+                    <span class="nav-text">Privacy</span>
                 </a>
-                <a href="terms.html" style="color:var(--green);text-decoration:none;font-weight:600;">
-                    <span class="nav-text">Terms & Conditions</span>
-                    <i class="fas fa-file-contract nav-icon" style="margin-left:6px"></i>
+                <a href="terms.html" role="menuitem" aria-current="page">
+                    <i class="fas fa-file-contract nav-icon" aria-hidden="true"></i>
+                    <span class="nav-text">Terms</span>
                 </a>
             </div>
         </div>
@@ -193,11 +170,11 @@
         </div>
     </div>
 
-    <div class="footer">
-        <h3 style="margin-bottom:6px;color:var(--green)">Need Support?</h3>
+    <footer class="footer" role="contentinfo">
+        <h3>Need Support?</h3>
         <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
         <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

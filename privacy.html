@@ -69,30 +69,33 @@
 
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-content">
             <div class="logo">
-                <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+                <a href="home.html" aria-label="FitSensei home">
+                    <img src="logo.png" alt="FitSensei Logo" class="logo-img">
+                </a>
                 <a href="home.html" aria-label="FitSensei">
                     <img src="fitsensei-text.png" alt="FitSensei" class="brand-image">
                 </a>
             </div>
-            <div class="nav-links">
-                <a href="home.html">
+            
+            <div class="nav-links" role="menubar" aria-label="Site links">
+                <a href="home.html" role="menuitem">
+                    <i class="fas fa-home nav-icon" aria-hidden="true"></i>
                     <span class="nav-text">Home</span>
-                    <i class="fas fa-home nav-icon"></i>
                 </a>
-                <a href="donate.html">
+                <a href="donate.html" role="menuitem">
+                    <i class="fas fa-hand-holding-heart nav-icon" aria-hidden="true"></i>
                     <span class="nav-text">Donate</span>
-                    <i class="fas fa-hand-holding-heart nav-icon"></i>
                 </a>
-                <a href="privacy.html">
-                    <span class="nav-text">Privacy Policy</span>
-                    <i class="fas fa-lock nav-icon"></i>
+                <a href="privacy.html" role="menuitem" aria-current="page">
+                    <i class="fas fa-lock nav-icon" aria-hidden="true"></i>
+                    <span class="nav-text">Privacy</span>
                 </a>
-                <a href="terms.html">
-                    <span class="nav-text">Terms & Conditions</span>
-                    <i class="fas fa-file-contract nav-icon"></i>
+                <a href="terms.html" role="menuitem">
+                    <i class="fas fa-file-contract nav-icon" aria-hidden="true"></i>
+                    <span class="nav-text">Terms</span>
                 </a>
             </div>
         </div>
@@ -161,7 +164,7 @@
         <h2>Your Rights & Controls</h2>
         <ul>
             <li><strong>Health data permissions:</strong> You control which HealthKit data FitSensei can read via the iOS Health app or iOS Settings → Health → Data Access & Devices. Revoke access any time.</li>
-            <li><strong>Opt-out:</strong> You can disable any optional analytics/crash reporting in FitSensei’s in-app settings.</li>
+            <li><strong>Opt-out:</strong> You can disable any optional analytics/crash reporting in FitSensei's in-app settings.</li>
             <li><strong>Delete local data:</strong> To remove local app data, use the app's account/settings screen (if applicable) or delete the app — this removes app data stored on-device. Contact us for assistance if needed.</li>
         </ul>
 
@@ -181,11 +184,12 @@
         </footer>
         </section>
     </div>
-    <div class="footer">
+    
+    <footer class="footer" role="contentinfo">
         <h3>Need Support?</h3>
         <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
         <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
