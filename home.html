@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -9,116 +9,38 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
-    /* Ensure mobile carousel shows only on small screens and hides the grid */
-    .phone-mockups-desktop { display: flex; } /* keeps desktop mockups */
-    .phone-carousel-mobile { display: none; }
-
-    @media (max-width: 768px) {
-      /* Hide desktop multi-mockup layout on mobile */
-      .phone-mockups-desktop { display: none; }
-
-      /* Show carousel single-slide on mobile */
-      .phone-carousel-mobile { display: block; margin-top: 1rem; }
-
-      /* Simple carousel sizing */
-      .carousel-wrapper {
-        width: 220px;
-        max-width: 86vw;
-        height: 460px;
-        margin: 0 auto;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .carousel-slide {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        opacity: 0; transform: translateX(100%);
-        transition: all 0.45s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .carousel-slide.active {
-        opacity: 1; transform: translateX(0);
-      }
-
-      /* previous (not strictly necessary) */
-      .carousel-slide.prev { transform: translateX(-100%); }
-
-      .carousel-controls-mobile {
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap: 10px;
-        margin-top: 12px;
-      }
-
-      .carousel-btn {
-        background: rgba(76, 175, 80, 0.12);
-        border: 2px solid #4CAF50;
-        color: #4CAF50;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        font-size: 22px;
-        cursor: pointer;
-      }
-
-      .carousel-dots {
-        display:flex; gap:6px; align-items:center;
-      }
-      .dot {
-        width: 10px; height: 10px; border-radius: 50%;
-        background: rgba(76,175,80,0.28); cursor:pointer;
-        transition: transform .18s, background .18s;
-      }
-      .dot.active { background: #4CAF50; transform: scale(1.15); }
-    }
-  </style>
 </head>
 
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-content">
       <div class="logo">
-        <a href="home.html"><img src="logo.png" alt="FitSensei Logo" class="logo-img"></a>
-        <a href="home.html"><img src="fitsensei-text.png" alt="FitSensei" class="brand-image"></a>
+        <a href="home.html" aria-label="FitSensei home">
+          <img src="logo.png" alt="FitSensei logo" class="logo-img">
+        </a>
+        <a href="home.html" aria-label="FitSensei">
+          <img src="fitsensei-text.png" alt="FitSensei" class="brand-image">
+        </a>
       </div>
 
-      <div class="nav-links">
-        <a href="home.html">
-          <span class="nav-text">Home</span>
-          <i class="fas fa-home nav-icon"></i>
-        </a>
-        <a href="privacy.html">
-          <span class="nav-text">Privacy Policy</span>
-          <i class="fas fa-lock nav-icon"></i>
-        </a>
-        <a href="terms.html">
-          <span class="nav-text">Terms & Conditions</span>
-          <i class="fas fa-file-contract nav-icon"></i>
-        </a>
-        <a href="donate.html">
-          <span class="nav-text">Donate</span>
-          <i class="fas fa-hand-holding-heart nav-icon"></i>
-        </a>
+      <div class="nav-links" role="menubar" aria-label="Site links">
+        <a href="home.html" role="menuitem"><i class="fas fa-home nav-icon" aria-hidden="true"></i><span class="nav-text">Home</span></a>
+        <a href="privacy.html" role="menuitem"><i class="fas fa-lock nav-icon" aria-hidden="true"></i><span class="nav-text">Privacy Policy</span></a>
+        <a href="terms.html" role="menuitem"><i class="fas fa-file-contract nav-icon" aria-hidden="true"></i><span class="nav-text">Terms &amp; Conditions</span></a>
+        <a href="donate.html" role="menuitem"><i class="fas fa-hand-holding-heart nav-icon" aria-hidden="true"></i><span class="nav-text">Donate</span></a>
       </div>
     </div>
   </nav>
 
-  <div class="container">
-    <div class="hero">
+  <main class="container" role="main" aria-label="FitSensei homepage">
+    <header class="hero">
       <h1>Master Your Fitness Journey</h1>
       <p>The ultimate iOS app for tracking workouts, monitoring progress, and achieving your fitness goals.</p>
       <button class="cta-button" onclick="window.open('https://apps.apple.com/us/app/fitsensei/id6753600543', '_blank')">Download on App Store</button>
-    </div>
+    </header>
 
     <!-- Desktop Version - All 5 Mockups -->
-    <div class="phone-mockups-desktop" aria-hidden="false">
+    <section class="phone-mockups-desktop" aria-hidden="false" aria-label="App screenshots (desktop)">
       <div class="floating-elements" aria-hidden="true">
         <div class="floating-icon">💪</div>
         <div class="floating-icon">⚡</div>
@@ -128,138 +50,99 @@
         <div class="floating-icon">🎯</div>
       </div>
 
-      <!-- Phone 1 -->
       <div class="iphone-mockup mockup-1">
         <div class="iphone-screen">
           <div class="screenshot-container">
-            <img src="1.png" alt="Dashboard — FitSensei" class="screenshot"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-            <div class="fallback-text" style="display: none;">Dashboard</div>
+            <img src="1.png" alt="Dashboard — FitSensei" class="screenshot">
+            <div class="fallback-text">Dashboard</div>
           </div>
         </div>
       </div>
 
-      <!-- Phone 2 -->
       <div class="iphone-mockup mockup-2">
         <div class="iphone-screen">
           <div class="screenshot-container">
-            <img src="2.png" alt="Workouts — FitSensei" class="screenshot"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-            <div class="fallback-text" style="display: none;">Workouts</div>
+            <img src="2.png" alt="Workouts — FitSensei" class="screenshot">
+            <div class="fallback-text">Workouts</div>
           </div>
         </div>
       </div>
 
-      <!-- Phone 3 -->
       <div class="iphone-mockup mockup-3">
         <div class="iphone-screen">
           <div class="screenshot-container">
-            <img src="3.png" alt="Progress — FitSensei" class="screenshot"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-            <div class="fallback-text" style="display: none;">Progress</div>
+            <img src="3.png" alt="Progress — FitSensei" class="screenshot">
+            <div class="fallback-text">Progress</div>
           </div>
         </div>
       </div>
 
-      <!-- Phone 4 -->
       <div class="iphone-mockup mockup-4">
         <div class="iphone-screen">
           <div class="screenshot-container">
-            <img src="4.png" alt="Analytics — FitSensei" class="screenshot"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-            <div class="fallback-text" style="display: none;">Analytics</div>
+            <img src="4.png" alt="Analytics — FitSensei" class="screenshot">
+            <div class="fallback-text">Analytics</div>
           </div>
         </div>
       </div>
 
-      <!-- Phone 5 -->
       <div class="iphone-mockup mockup-5">
         <div class="iphone-screen">
           <div class="screenshot-container">
-            <img src="5.png" alt="Profile — FitSensei" class="screenshot"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-            <div class="fallback-text" style="display: none;">Profile</div>
+            <img src="5.png" alt="Profile — FitSensei" class="screenshot">
+            <div class="fallback-text">Profile</div>
           </div>
         </div>
       </div>
-    </div> <!-- end desktop mockups -->
+    </section>
 
-    <!-- Mobile: single-slide carousel (swipe / keyboard) -->
-    <div class="phone-carousel-mobile" aria-hidden="false">
-      <div class="carousel-wrapper" aria-live="polite">
-        <!-- Each slide wraps an iphone-mockup like desktop but as carousel-slide -->
-        <div class="carousel-slide active">
-          <div class="iphone-mockup">
-            <div class="iphone-screen">
-              <div class="screenshot-container">
-                <img src="1.png" alt="Dashboard — FitSensei" class="screenshot"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.fallback-text').style.display='flex';">
-                <div class="fallback-text" style="display: none;">Dashboard</div>
-              </div>
+    <!-- Mobile: vertical stacked mockups (simplified; preserves aspect ratio) -->
+    <section class="phone-carousel-mobile" aria-label="App screenshots (mobile)">
+      <div class="phone-mockups-vertical">
+        <div class="iphone-mockup">
+          <div class="iphone-screen">
+            <div class="screenshot-container">
+              <img src="1.png" alt="Dashboard — FitSensei" class="screenshot">
             </div>
           </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="iphone-mockup">
-            <div class="iphone-screen">
-              <div class="screenshot-container">
-                <img src="2.png" alt="Workouts — FitSensei" class="screenshot">
-                <div class="fallback-text" style="display: none;">Workouts</div>
-              </div>
+        <div class="iphone-mockup">
+          <div class="iphone-screen">
+            <div class="screenshot-container">
+              <img src="2.png" alt="Workouts — FitSensei" class="screenshot">
             </div>
           </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="iphone-mockup">
-            <div class="iphone-screen">
-              <div class="screenshot-container">
-                <img src="3.png" alt="Progress — FitSensei" class="screenshot">
-                <div class="fallback-text" style="display: none;">Progress</div>
-              </div>
+        <div class="iphone-mockup">
+          <div class="iphone-screen">
+            <div class="screenshot-container">
+              <img src="3.png" alt="Progress — FitSensei" class="screenshot">
             </div>
           </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="iphone-mockup">
-            <div class="iphone-screen">
-              <div class="screenshot-container">
-                <img src="4.png" alt="Analytics — FitSensei" class="screenshot">
-                <div class="fallback-text" style="display: none;">Analytics</div>
-              </div>
+        <div class="iphone-mockup">
+          <div class="iphone-screen">
+            <div class="screenshot-container">
+              <img src="4.png" alt="Analytics — FitSensei" class="screenshot">
             </div>
           </div>
         </div>
 
-        <div class="carousel-slide">
-          <div class="iphone-mockup">
-            <div class="iphone-screen">
-              <div class="screenshot-container">
-                <img src="5.png" alt="Profile — FitSensei" class="screenshot">
-                <div class="fallback-text" style="display: none;">Profile</div>
-              </div>
+        <div class="iphone-mockup">
+          <div class="iphone-screen">
+            <div class="screenshot-container">
+              <img src="5.png" alt="Profile — FitSensei" class="screenshot">
             </div>
           </div>
         </div>
-      </div> <!-- end carousel-wrapper -->
-
-      <!-- Mobile carousel controls (dots + optional arrows). Hidden on desktop via CSS above -->
-      <div class="carousel-controls-mobile" aria-hidden="false">
-        <button class="carousel-btn prev-btn" onclick="changeSlide(-1)" aria-label="Previous">‹</button>
-        <div class="carousel-dots" role="tablist" aria-label="Screenshots">
-          <span class="dot active" onclick="goToSlide(0)" role="tab" aria-selected="true"></span>
-          <span class="dot" onclick="goToSlide(1)" role="tab"></span>
-          <span class="dot" onclick="goToSlide(2)" role="tab"></span>
-          <span class="dot" onclick="goToSlide(3)" role="tab"></span>
-          <span class="dot" onclick="goToSlide(4)" role="tab"></span>
-        </div>
-        <button class="carousel-btn next-btn" onclick="changeSlide(1)" aria-label="Next">›</button>
       </div>
-    </div> <!-- end phone-carousel-mobile -->
+    </section>
 
-    <div class="running-figure-mobile">
+    <!-- Running figure (mobile & desktop) -->
+    <div class="running-figure-mobile" aria-hidden="true">
       <div class="runner-body">
         <div class="runner-head"></div>
         <div class="runner-torso"></div>
@@ -269,66 +152,15 @@
         <div class="runner-leg right"></div>
       </div>
     </div>
-  </div> <!-- end container -->
 
-  <div class="footer">
+  </main>
+
+  <footer class="footer" role="contentinfo">
     <h3>Need Support?</h3>
     <p>Contact us at <a href="mailto:fitsensei@cyphix.org">fitsensei@cyphix.org</a></p>
     <p style="margin-top: 1rem; opacity: 0.8;">© 2025 FitSensei by Cyphix. All rights reserved.</p>
-  </div>
+  </footer>
 
   <script src="script.js"></script>
-
-  <!-- Inline initializer: ensures dots & slides start correct and enables touch for the wrapper (if script.js not present) -->
-  <script>
-    (function() {
-      // Basic slide init (works even if your script.js also provides functions)
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots   = document.querySelectorAll('.dot');
-      if (!slides.length) return;
-
-      slides.forEach((s, i) => {
-        s.dataset.index = i;
-      });
-
-      // Ensure exactly one active slide/dot
-      function setActive(n) {
-        slides.forEach((s, i) => s.classList.toggle('active', i === n));
-        dots.forEach((d, i) => d.classList.toggle('active', i === n));
-      }
-
-      // wire up dots if user clicks
-      dots.forEach((dot, idx) => dot.addEventListener('click', () => setActive(idx)));
-
-      // touch/swipe handlers (lightweight fallback if your script.js isn't loaded)
-      let startX = 0, endX = 0;
-      const wrapper = document.querySelector('.carousel-wrapper');
-      if (wrapper) {
-        wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
-        wrapper.addEventListener('touchend', (e) => {
-          endX = e.changedTouches[0].clientX;
-          const diff = startX - endX;
-          const threshold = 40;
-          let activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
-          if (Math.abs(diff) > threshold) {
-            if (diff > 0) activeIndex = Math.min(activeIndex + 1, slides.length - 1);
-            else activeIndex = Math.max(activeIndex - 1, 0);
-            setActive(activeIndex);
-          }
-        }, {passive:true});
-      }
-
-      // keyboard arrow support (mobile soft keyboards won't trigger, but physical keyboards do)
-      document.addEventListener('keydown', (e) => {
-        if (window.innerWidth > 768) return;
-        let idx = Array.from(slides).findIndex(s => s.classList.contains('active'));
-        if (e.key === 'ArrowLeft') { idx = Math.max(0, idx - 1); setActive(idx); }
-        if (e.key === 'ArrowRight') { idx = Math.min(slides.length - 1, idx + 1); setActive(idx); }
-      });
-
-      // initial state
-      setActive(0);
-    })();
-  </script>
 </body>
 </html>

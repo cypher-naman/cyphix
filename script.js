@@ -1,258 +1,107 @@
-// ============================
-// script.js (updated)
-// ============================
+/* ============================
+   script.js (full replacement)
+   ============================ */
 
-// Mobile Carousel Functionality
-let currentSlide = 0;
-const totalSlides = 5; // change if you add/remove slides
-
-function changeSlide(direction) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-
-    if (!slides.length) return;
-
-    // Remove active from current
-    slides[currentSlide].classList.remove('active');
-    if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
-
-    // Next index
-    currentSlide += direction;
-
-    if (currentSlide >= totalSlides) { currentSlide = 0; }
-    else if (currentSlide < 0) { currentSlide = totalSlides - 1; }
-
-    // Add active to new
-    slides[currentSlide].classList.add('active');
-    if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+/* Debounce helper */
+function debounce(fn, wait = 120) {
+  let t;
+  return function(...args) {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), wait);
+  };
 }
 
-function goToSlide(slideIndex) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-    if (!slides.length || slideIndex < 0 || slideIndex >= slides.length) return;
-
-    slides[currentSlide].classList.remove('active');
-    if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
-
-    currentSlide = slideIndex;
-
-    slides[currentSlide].classList.add('active');
-    if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+/* Set --nav-height CSS variable to match the actual navbar height */
+function setNavHeightCSSVar() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+  const h = Math.round(navbar.getBoundingClientRect().height);
+  document.documentElement.style.setProperty('--nav-height', `${h}px`);
 }
+window.addEventListener('resize', debounce(setNavHeightCSSVar, 120));
+document.addEventListener('DOMContentLoaded', setNavHeightCSSVar);
 
-// Auto-advance carousel (optional)
-let autoAdvanceTimer = null;
-function startAutoAdvance(interval = 5000) {
-    stopAutoAdvance();
-    autoAdvanceTimer = setInterval(() => { changeSlide(1); }, interval);
-}
-function stopAutoAdvance() {
-    if (autoAdvanceTimer) { clearInterval(autoAdvanceTimer); autoAdvanceTimer = null; }
-}
+/* Image fade-in and fallback handling */
+function initImageLoading() {
+  const imgs = document.querySelectorAll('img.screenshot');
+  imgs.forEach(img => {
+    img.style.opacity = '0';
+    img.style.transition = 'opacity .45s ease';
+    // show fallback text if error
+    img.addEventListener('error', () => {
+      const fallback = img.parentElement.querySelector('.fallback-text');
+      if (fallback) { fallback.style.display = 'flex'; }
+      img.style.display = 'none';
+    }, { once: true, passive: true });
 
-// Touch/Swipe functionality for mobile
-let startX = 0;
-let endX = 0;
-function handleTouchStart(e) { startX = e.touches[0].clientX; }
-function handleTouchEnd(e)   { endX   = e.changedTouches[0].clientX; handleSwipe(); }
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = startX - endX;
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) changeSlide(1);
-        else changeSlide(-1);
+    if (img.complete && img.naturalWidth) {
+      img.style.opacity = '1';
+    } else {
+      img.addEventListener('load', () => {
+        img.style.opacity = '1';
+      }, { once: true, passive: true });
     }
+  });
 }
 
-// Intersection Observer for reveal animations
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+/* Ripple effect for buttons */
+function createRipple(e) {
+  const button = e.currentTarget;
+  const rect = button.getBoundingClientRect();
+  const diameter = Math.max(rect.width, rect.height);
+  const circle = document.createElement('span');
+
+  circle.className = 'ripple';
+  circle.style.width = circle.style.height = `${diameter}px`;
+
+  const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+  const clientY = (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
+
+  circle.style.left = `${clientX - rect.left - diameter/2}px`;
+  circle.style.top = `${clientY - rect.top - diameter/2}px`;
+
+  const existing = button.getElementsByClassName('ripple')[0];
+  if (existing) existing.remove();
+  button.appendChild(circle);
+
+  setTimeout(() => { if (circle && circle.parentNode) circle.parentNode.removeChild(circle); }, 650);
+}
+
+/* Initialize page interactions */
+document.addEventListener('DOMContentLoaded', () => {
+  setNavHeightCSSVar();
+  initImageLoading();
+
+  // Apply ripple to common buttons
+  const buttons = document.querySelectorAll('.cta-button, .donate-btn, .back-button');
+  buttons.forEach(btn => {
+    btn.style.position = btn.style.position || 'relative';
+    btn.style.overflow = btn.style.overflow || 'hidden';
+    btn.addEventListener('click', createRipple);
+    btn.addEventListener('touchstart', createRipple, { passive: true });
+  });
+
+  // Optional: fade-in stacked mockups using IntersectionObserver
+  const verticalMocks = document.querySelectorAll('.phone-mockups-vertical .iphone-mockup');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          obs.unobserve(e.target);
         }
+      });
+    }, { threshold: 0.12 });
+
+    verticalMocks.forEach((m) => {
+      m.style.opacity = '0';
+      m.style.transform = 'translateY(12px)';
+      m.style.transition = 'opacity .6s ease, transform .6s ease';
+      obs.observe(m);
     });
-}, observerOptions);
-
-// Parallax effect for floating elements
-function parallaxEffect() {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.floating-icon');
-    parallaxElements.forEach((element, index) => {
-        const speed = 0.1 + (index * 0.04);
-        const yPos = -(scrolled * speed);
-        element.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.08}deg)`;
-    });
-}
-
-// Throttled scroll update for performance
-let ticking = false;
-function updateParallax() {
-    parallaxEffect();
-    ticking = false;
-}
-
-window.addEventListener('scroll', function() {
-    if (!ticking) {
-        requestAnimationFrame(updateParallax);
-        ticking = true;
-    }
+  } else {
+    // fallback show immediately
+    verticalMocks.forEach(m => { m.style.opacity = '1'; });
+  }
 });
-
-// Navbar background change on scroll
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    navbar.style.background = (window.scrollY > 100) ? 'rgba(0, 0, 0, 0.95)' : 'rgba(0, 0, 0, 0.8)';
-});
-
-// Create ripple effect on button click
-function createRipple(event) {
-    const button = event.currentTarget;
-    const rect = button.getBoundingClientRect();
-    const circle = document.createElement('span');
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-
-    circle.style.width = circle.style.height = `${diameter}px`;
-    // Use clientX/Y for proper position in document
-    const clientX = (event.touches && event.touches[0]) ? event.touches[0].clientX : event.clientX;
-    const clientY = (event.touches && event.touches[0]) ? event.touches[0].clientY : event.clientY;
-
-    circle.style.left = `${clientX - rect.left - radius}px`;
-    circle.style.top  = `${clientY - rect.top - radius}px`;
-    circle.classList.add('ripple');
-
-    const existing = button.getElementsByClassName('ripple')[0];
-    if (existing) existing.remove();
-
-    button.appendChild(circle);
-}
-
-// Add ripple style element only once
-(function addRippleStyleToHead(){
-    if (document.getElementById('fitsensei-ripple-style')) return;
-    const rippleStyle = document.createElement('style');
-    rippleStyle.id = 'fitsensei-ripple-style';
-    rippleStyle.textContent = `
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple 600ms linear;
-            background-color: rgba(255, 255, 255, 0.6);
-            pointer-events: none;
-        }
-        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
-    `;
-    document.head.appendChild(rippleStyle);
-})();
-
-// DOMContentLoaded initialization
-document.addEventListener('DOMContentLoaded', function() {
-    const carouselWrapper = document.querySelector('.carousel-wrapper');
-
-    if (carouselWrapper) {
-        carouselWrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
-        carouselWrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
-        // startAutoAdvance(); // enable if you want autoplay
-    }
-
-    // Keyboard navigation for mobile carousel
-    document.addEventListener('keydown', function(e) {
-        if (window.innerWidth <= 768) {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            else if (e.key === 'ArrowRight') changeSlide(1);
-        }
-    });
-
-    // Observe elements for reveal animations
-    const animateElements = document.querySelectorAll('.iphone-mockup, .hero');
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // Set up image loading fade-in
-    const images = document.querySelectorAll('.screenshot');
-    images.forEach(img => {
-        img.addEventListener('load', function() { this.style.opacity = '1'; });
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.5s ease';
-        if (img.complete) img.style.opacity = '1';
-    });
-
-    // Apply ripple effect to select buttons
-    const buttons = document.querySelectorAll('.cta-button, .carousel-btn, .back-button, .donate-btn');
-    buttons.forEach(button => {
-        button.style.position = button.style.position || 'relative';
-        button.style.overflow = button.style.overflow || 'hidden';
-        button.addEventListener('click', createRipple);
-        // touchstart for mobile so ripple triggers immediately
-        button.addEventListener('touchstart', createRipple, { passive: true });
-    });
-
-    // Init carousel dots & slides to first slide when mobile
-    handleResize();
-
-    // Accessibility shortcut: Ctrl/Cmd + D opens donate page in new tab
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
-            window.open('donate.html', '_blank');
-        }
-    });
-});
-
-// Smooth anchor scrolling for on-page anchors
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
-});
-
-// Throttled resize handler (debounce)
-function debounce(func, wait = 250, immediate) {
-    let timeout;
-    return function executedFunction() {
-        const context = this, args = arguments;
-        const later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
-
-// Handle window resize
-const handleResize = debounce(function() {
-    const isMobile = window.innerWidth <= 768;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots   = document.querySelectorAll('.dot');
-
-    if (isMobile && slides.length) {
-        currentSlide = 0;
-        slides.forEach((slide, index) => slide.classList.toggle('active', index === 0));
-        dots.forEach((dot, index) => dot.classList.toggle('active', index === 0));
-    }
-
-    // stop/start auto-advance depending on viewport (optional)
-    // if (!isMobile) stopAutoAdvance();
-    // else startAutoAdvance(5000);
-}, 250);
-
-window.addEventListener('resize', handleResize);
-
-// Parallax update loop already hooked to scroll above
-
-// End of script.js
