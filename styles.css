@@ -57,13 +57,13 @@ html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 .nav-links {
     display:flex;
     align-items:center;
-    gap:0.6rem; /* smaller gap between buttons */
+    gap:0.4rem; /* smaller gap between buttons */
 }
 
 .nav-links a {
     display:inline-flex;
     align-items:center;
-    gap:4px;    /* smaller gap between icon + text */
+    gap:2px;    /* smaller gap between icon + text */
     color:#ddd;
     text-decoration:none;
     padding:0.35rem 0.55rem; /* reduced inner padding */
@@ -73,7 +73,7 @@ html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 }
 .nav-links a:hover { color: var(--main-color); background: rgba(76,175,80,0.06); transform: translateY(-2px); }
 .nav-icon {
-    font-size:0.95rem; /* previous was 1rem */
+    font-size:0.75rem; /* previous was 1rem */
 }
 
 /* Layout container */
