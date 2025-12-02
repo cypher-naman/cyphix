@@ -54,10 +54,27 @@ html { scroll-padding-top: calc(var(--nav-height) + 12px); }
 .brand-image { display:block; max-height:36px; max-width:220px; width:auto; object-fit:contain; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
 
 /* Nav links */
-.nav-links { display:flex; align-items:center; gap:1.1rem; }
-.nav-links a { display:inline-flex; align-items:center; gap:8px; color:#ddd; text-decoration:none; padding:0.4rem 0.85rem; border-radius:18px; transition:all .2s; font-weight:500; }
+.nav-links {
+    display:flex;
+    align-items:center;
+    gap:0.6rem; /* smaller gap between buttons */
+}
+
+.nav-links a {
+    display:inline-flex;
+    align-items:center;
+    gap:4px;    /* smaller gap between icon + text */
+    color:#ddd;
+    text-decoration:none;
+    padding:0.35rem 0.55rem; /* reduced inner padding */
+    border-radius:14px;
+    transition:all .2s;
+    font-weight:500;
+}
 .nav-links a:hover { color: var(--main-color); background: rgba(76,175,80,0.06); transform: translateY(-2px); }
-.nav-icon { font-size:1rem; }
+.nav-icon {
+    font-size:0.95rem; /* previous was 1rem */
+}
 
 /* Layout container */
 .container { max-width:1200px; margin:0 auto; padding: calc(var(--nav-height) + 36px) 20px 60px; position:relative; }
