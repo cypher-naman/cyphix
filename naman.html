@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naman Sharma — iOS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #000;
+  --surface: #0d0d0d;
+  --surface2: #161616;
+  --surface3: #1c1c1e;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.14);
+  --text: #f5f5f7;
+  --text2: #98989d;
+  --text3: #555;
+  --accent: #2997ff;
+  --accent2: #30d158;
+  --accent3: #ff375f;
+  --accent4: #ffd60a;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r: 16px;
+  --r-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: -0.3px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+section { padding: 110px 0; position: relative; z-index: 1; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 140px 28px 80px;
+  position: relative; overflow: hidden; z-index: 1;
+}
+
+/* Animated grid background */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(41,151,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41,151,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
+  animation: gridDrift 20s linear infinite;
+}
+@keyframes gridDrift { 0% { transform: translateY(0); } 100% { transform: translateY(60px); } }
+
+/* Orb */
+.hero-orb {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(41,151,255,0.10) 0%, rgba(94,92,230,0.06) 40%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  animation: orbPulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes orbPulse { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%,-50%) scale(1.08); opacity: 1; } }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(48,209,88,0.1);
+  border: 0.5px solid rgba(48,209,88,0.25);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; color: var(--accent2);
+  margin-bottom: 28px; letter-spacing: 0.3px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent2);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.75); } }
+
+.hero-name {
+  font-size: clamp(52px, 9vw, 100px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.0;
+  margin-bottom: 14px;
+  background: linear-gradient(160deg, #fff 30%, #666 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-title {
+  font-size: clamp(20px, 3.5vw, 32px);
+  font-weight: 400; color: var(--text2);
+  margin-bottom: 22px; letter-spacing: -0.02em;
+  animation: fadeUp 0.8s 0.12s ease both;
+}
+.hero-title em { color: var(--accent); font-style: normal; font-weight: 500; }
+.hero-desc {
+  font-size: 16px; color: var(--text2); max-width: 520px;
+  margin: 0 auto 40px; line-height: 1.7;
+  animation: fadeUp 0.8s 0.22s ease both;
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+.hero-cta {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.32s ease both;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; border-radius: 100px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  transition: all 0.2s; cursor: pointer; border: none;
+  font-family: var(--font);
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #0a84ff; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(41,151,255,0.3); }
+.btn-icon {
+  background: var(--surface2); color: var(--text2);
+  border: 0.5px solid var(--border2); padding: 10px 16px;
+}
+.btn-icon:hover { background: var(--surface3); color: var(--text); transform: translateY(-1px); }
+.btn-icon svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.hero-metrics {
+  display: flex; justify-content: center;
+  margin-top: 80px;
+  border-top: 0.5px solid var(--border);
+  padding-top: 36px; width: 100%; max-width: 680px;
+  animation: fadeUp 0.8s 0.42s ease both;
+  gap: 0;
+}
+.metric { flex: 1; text-align: center; padding: 0 28px; border-right: 0.5px solid var(--border); }
+.metric:last-child { border-right: none; }
+.metric-value { font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -0.04em; line-height: 1.1; }
+.metric-label { font-size: 11px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500; }
+
+/* ── SECTION HEADERS ── */
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.section-title { font-size: clamp(30px, 4.5vw, 48px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 14px; }
+.section-sub { font-size: 16px; color: var(--text2); max-width: 480px; line-height: 1.65; }
+
+hr.div { border: none; border-top: 0.5px solid var(--border); margin: 0 28px; }
+
+/* ── ABOUT ── */
+#about .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 64px; }
+.avatar {
+  width: 96px; height: 96px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent) 0%, #5e5ce6 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 28px;
+  position: relative;
+}
+.avatar::after {
+  content: '';
+  position: absolute; inset: -3px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent), #5e5ce6, var(--accent));
+  z-index: -1; animation: spin 4s linear infinite; opacity: 0.5;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.about-p { font-size: 15px; color: var(--text2); line-height: 1.75; margin-bottom: 14px; }
+.about-p strong { color: var(--text); font-weight: 600; }
+.about-links { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
+.about-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  border: 0.5px solid var(--border2); color: var(--text2);
+  background: var(--surface2); transition: all 0.2s;
+}
+.about-link svg { width: 15px; height: 15px; }
+.about-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+.cards-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.about-card {
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: var(--r); padding: 22px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.about-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.about-card .icon { font-size: 22px; margin-bottom: 10px; }
+.about-card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.about-card p { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+/* ── SKILLS ── */
+#skills .skill-wrap { margin-top: 56px; }
+.skill-group { border-top: 0.5px solid var(--border); padding: 28px 0; display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: start; }
+.skill-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); padding-top: 5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  display: inline-block; padding: 5px 13px;
+  border-radius: 100px; font-size: 13px; color: var(--text2);
+  border: 0.5px solid var(--border);
+  background: var(--surface2);
+  transition: all 0.18s; cursor: default;
+}
+.tag:hover { color: var(--accent); border-color: rgba(41,151,255,0.35); background: rgba(41,151,255,0.07); transform: translateY(-1px); }
+
+/* ── EXPERIENCE ── */
+#experience .exp-list { margin-top: 64px; display: flex; flex-direction: column; }
+
+.exp-item {
+  display: grid; grid-template-columns: 220px 1fr;
+  border-top: 0.5px solid var(--border);
+  transition: background 0.25s;
+  position: relative; cursor: default;
+}
+.exp-item:last-child { border-bottom: 0.5px solid var(--border); }
+
+/* Animated left accent line */
+.exp-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.exp-item:hover::before { transform: scaleY(1); }
+.exp-item:hover { background: rgba(255,255,255,0.018); }
+
+.exp-left { padding: 32px 24px 32px 20px; border-right: 0.5px solid var(--border); }
+.exp-company { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.exp-period { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+.exp-location { font-size: 12px; color: var(--text3); }
+
+/* Company link badge */
+.exp-link-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 12px; padding: 5px 10px; border-radius: 8px;
+  font-size: 11px; font-weight: 500; text-decoration: none;
+  background: rgba(41,151,255,0.08); border: 0.5px solid rgba(41,151,255,0.18);
+  color: var(--accent); transition: all 0.2s;
+  cursor: pointer;
+}
+.exp-link-badge:hover { background: rgba(41,151,255,0.15); transform: translateY(-1px); }
+.exp-link-badge svg { width: 11px; height: 11px; }
+
+.exp-right { padding: 32px 36px; }
+.exp-role { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 16px; letter-spacing: -0.25px; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.exp-bullets li { font-size: 13.5px; color: var(--text2); padding-left: 16px; position: relative; line-height: 1.65; }
+.exp-bullets li::before { content: ''; position: absolute; left: 0; top: 9px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+.exp-bullets li strong { color: var(--text); font-weight: 600; }
+
+/* ── PROJECTS ── */
+#projects .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 64px; }
+
+.proj-card {
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: var(--r); padding: 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  text-decoration: none; color: inherit;
+  transition: all 0.3s; position: relative; overflow: hidden;
+  /* shine effect setup */
+}
+.proj-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.04), transparent 60%);
+  opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.proj-card:hover::after { opacity: 1; }
+.proj-card:hover { border-color: rgba(41,151,255,0.25); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.proj-card.featured { grid-column: 1 / -1; background: linear-gradient(145deg, #0a1520 0%, #0d0d0d 60%); border-color: rgba(41,151,255,0.18); }
+
+.proj-icon { width: 52px; height: 52px; border-radius: 13px; background: linear-gradient(135deg, var(--accent) 0%, #5e5ce6 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.proj-name { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+.proj-tagline { font-size: 14px; color: var(--text2); line-height: 1.55; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; }
+.stack-tag { font-size: 11px; padding: 4px 10px; border-radius: 100px; background: rgba(255,255,255,0.04); border: 0.5px solid var(--border); color: var(--text3); }
+.proj-links { display: flex; gap: 10px; margin-top: 4px; }
+.proj-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: var(--accent);
+  text-decoration: none; padding: 7px 14px;
+  border: 0.5px solid rgba(41,151,255,0.25); border-radius: 100px;
+  transition: all 0.2s; background: rgba(41,151,255,0.06);
+}
+.proj-link svg { width: 14px; height: 14px; }
+.proj-link:hover { background: rgba(41,151,255,0.14); transform: translateY(-1px); }
+
+/* ── EDUCATION ── */
+#education .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 64px; }
+.edu-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 26px; transition: all 0.25s; }
+.edu-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.edu-badge { display: inline-block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 100px; margin-bottom: 14px; }
+.badge-degree { background: rgba(41,151,255,0.1); color: var(--accent); }
+.badge-cert { background: rgba(48,209,88,0.1); color: var(--accent2); }
+.badge-award { background: rgba(255,214,10,0.1); color: var(--accent4); }
+.badge-school { background: rgba(255,255,255,0.06); color: var(--text3); }
+.edu-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.35; }
+.edu-sub { font-size: 12px; color: var(--text3); line-height: 1.55; }
+.edu-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--accent); text-decoration: none; margin-top: 10px; transition: opacity 0.2s; }
+.edu-link:hover { opacity: 0.7; }
+
+/* ── CONTACT ── */
+#contact { text-align: center; }
+.contact-inner { max-width: 600px; margin: 0 auto; }
+.contact-email {
+  font-size: clamp(18px, 3.5vw, 28px); font-weight: 600;
+  color: var(--accent); text-decoration: none; display: block;
+  margin: 36px 0; letter-spacing: -0.02em; transition: opacity 0.2s;
+}
+.contact-email:hover { opacity: 0.7; }
+.contact-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer { border-top: 0.5px solid var(--border); padding: 24px; text-align: center; font-size: 11px; color: var(--text3); letter-spacing: 0.1px; z-index: 1; position: relative; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94); }
+.reveal.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.16s; }
+.d3 { transition-delay: 0.24s; }
+.d4 { transition-delay: 0.32s; }
+
+/* ── FLOATING PARTICLES ── */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(41,151,255,0.6) 0%, transparent 70%);
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ── GLOWING CURSOR TRAIL (desktop) ── */
+.cursor-glow {
+  position: fixed; pointer-events: none; z-index: 9999;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(41,151,255,0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: left 0.12s ease, top 0.12s ease;
+}
+
+/* ── COUNTER ANIMATION ── */
+.count { display: inline-block; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  #about .about-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .exp-item { grid-template-columns: 1fr; }
+  .exp-left { border-right: none; border-bottom: 0.5px solid var(--border); padding: 24px 20px; }
+  .exp-right { padding: 24px 20px; }
+  #projects .proj-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { grid-column: 1; }
+  .hero-metrics { flex-wrap: wrap; }
+  .metric { flex: 0 0 50%; border-right: none; border-bottom: 0.5px solid var(--border); padding: 20px 0; }
+  .metric:nth-child(odd) { border-right: 0.5px solid var(--border); }
+  .metric:last-child { border-bottom: none; }
+  .skill-group { grid-template-columns: 1fr; gap: 10px; }
+  .cards-2x2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Naman Sharma</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div>Available for opportunities</div>
+  <h1 class="hero-name">Naman Sharma</h1>
+  <p class="hero-title"><em>iOS Developer</em> &amp; Indie App Creator</p>
+  <p class="hero-desc">5+ years shipping production iOS apps in health, fitness, and consumer domains. From release pipelines to App Store launches.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">
+      <!-- Mail icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Get in touch
+    </a>
+    <a href="https://apps.apple.com/us/app/fitsensei/id6753600543" target="_blank" class="btn btn-icon">
+      <!-- Apple icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04l-.08.22zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      FitSensei
+    </a>
+    <a href="https://www.linkedin.com/in/cypher-naman" target="_blank" class="btn btn-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/cypher-naman" target="_blank" class="btn btn-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+  <div class="hero-metrics">
+    <div class="metric"><div class="metric-value count" data-target="5">0</div><div class="metric-label">Years+</div></div>
+    <div class="metric"><div class="metric-value count" data-target="5">0</div><div class="metric-label">Apps Shipped+</div></div>
+    <div class="metric"><div class="metric-value count" data-target="25" data-suffix="%">0</div><div class="metric-label">Load Time Saved</div></div>
+    <div class="metric"><div class="metric-value count" data-target="90" data-suffix="%">0</div><div class="metric-label">Test Coverage</div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="eyebrow reveal">About</div>
+    <h2 class="section-title reveal d1">Crafting iOS experiences<br>that feel native.</h2>
+    <div class="about-wrap">
+      <div class="reveal d2">
+        <div class="avatar">NS</div>
+        <p class="about-p">I'm an <strong>iOS Developer based in New Delhi</strong> with over 5 years of experience building apps that people rely on daily. My work spans health and fitness, secure communication, and consumer utilities.</p>
+        <p class="about-p">I shipped <strong>FitSensei</strong> — a solo-built health and fitness app — entirely on my own, from architecture and HealthKit integration to App Store launch. I care deeply about <strong>performance, clean architecture, and long-term maintainability</strong>.</p>
+        <p class="about-p">Outside code, I mentor junior developers, win hackathons, and present technical ideas to engineering teams.</p>
+        <div class="about-links">
+          <a href="https://www.linkedin.com/in/cypher-naman" target="_blank" class="about-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/cypher-naman" target="_blank" class="about-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://fitsensei.cyphix.org/" target="_blank" class="about-link">
+            <!-- Globe icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            cyphix.org
+          </a>
+          <a href="https://apps.apple.com/us/app/fitsensei/id6753600543" target="_blank" class="about-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04l-.08.22zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            FitSensei
+          </a>
+          <a href="mailto:naman.sharma.coder@gmail.com" class="about-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+      <div class="cards-2x2 reveal d3">
+        <div class="about-card"><div class="icon">📱</div><h3>iOS First</h3><p>SwiftUI, UIKit, Combine, SwiftData — native, performant apps with modern Apple frameworks.</p></div>
+        <div class="about-card"><div class="icon">❤️</div><h3>HealthKit Expert</h3><p>Pipelines for real-time health data, wearable sync, and Apple Watch integration.</p></div>
+        <div class="about-card"><div class="icon">🚀</div><h3>Full Lifecycle</h3><p>Architecture, CI/CD, App Store submission, performance tuning, and maintenance.</p></div>
+        <div class="about-card"><div class="icon">🏗️</div><h3>Clean Architecture</h3><p>MVVM, VIPER, Coordinator Pattern, Protocol-Oriented Programming, SOLID.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="eyebrow reveal">Core Skills</div>
+    <h2 class="section-title reveal d1">The full toolkit.</h2>
+    <p class="section-sub reveal d2">Every layer of a production iOS app — from data pipelines to the App Store.</p>
+    <div class="skill-wrap reveal d3">
+      <div class="skill-group">
+        <div class="skill-label">iOS Development</div>
+        <div class="tags">
+          <span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">UIKit</span><span class="tag">Combine</span><span class="tag">SwiftData</span><span class="tag">Async/Await</span><span class="tag">Multithreading</span><span class="tag">Objective-C</span><span class="tag">CoreData</span><span class="tag">Realm</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Apple Frameworks</div>
+        <div class="tags">
+          <span class="tag">HealthKit</span><span class="tag">WatchOS</span><span class="tag">iPadOS</span><span class="tag">MacOS</span><span class="tag">Widgets</span><span class="tag">Core Location</span><span class="tag">Core Motion</span><span class="tag">Swift Package Manager</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Architecture</div>
+        <div class="tags">
+          <span class="tag">MVVM</span><span class="tag">MVC</span><span class="tag">VIPER</span><span class="tag">Coordinator Pattern</span><span class="tag">Protocol-Oriented Programming</span><span class="tag">SOLID</span><span class="tag">Clean Architecture</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Tooling and DevOps</div>
+        <div class="tags">
+          <span class="tag">Xcode</span><span class="tag">Xcode Instruments</span><span class="tag">Git</span><span class="tag">Fastlane</span><span class="tag">GitLab CI/CD</span><span class="tag">XCTest</span>
+        </div>
+      </div>
+      <div class="skill-group" style="border-bottom: 0.5px solid var(--border);">
+        <div class="skill-label">Backend and Cross-Platform</div>
+        <div class="tags">
+          <span class="tag">Firebase</span><span class="tag">Flutter</span><span class="tag">React Native</span><span class="tag">REST APIs</span><span class="tag">GraphQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="eyebrow reveal">Experience</div>
+    <h2 class="section-title reveal d1">Where I've built.</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal d1">
+        <div class="exp-left">
+          <div class="exp-company">FitSensei</div>
+          <div class="exp-period">Sep 2025 — Present</div>
+          <div class="exp-location">New Delhi, India</div>
+          <a href="https://apps.apple.com/us/app/fitsensei/id6753600543" target="_blank" class="exp-link-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04l-.08.22zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://fitsensei.cyphix.org/" target="_blank" class="exp-link-badge" style="margin-top:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Independent iOS Developer</div>
+          <ul class="exp-bullets">
+            <li>Designed, built, and shipped a complete health and fitness iOS application from concept to App Store release</li>
+            <li>Engineered scalable HealthKit pipelines to process real-time and historical health data from multiple wearable sources</li>
+            <li>Authored XCTest unit and UI test cases achieving <strong>90% code coverage</strong> across all core modules</li>
+            <li>Owned the full product lifecycle including architecture, performance tuning, App Store releases, and maintenance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal d2">
+        <div class="exp-left">
+          <div class="exp-company">BVOY</div>
+          <div class="exp-period">Sep 2024 — Aug 2025</div>
+          <div class="exp-location">New Delhi, India</div>
+          <a href="https://apps.apple.com/in/app/bvoy-stress-sleep-tracker/id6451352410" target="_blank" class="exp-link-badge" style="margin-top:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">iOS Developer</div>
+          <ul class="exp-bullets">
+            <li>Developed and maintained a production iOS application using SwiftUI, SwiftData, HealthKit, Widgets, and WatchOS</li>
+            <li>Profiled and resolved memory leaks and retain cycles using Xcode Instruments, reducing memory footprint by <strong>30%</strong></li>
+            <li>Rebuilt all screens and components to improve responsiveness and animations, cutting screen load times by <strong>25%</strong></li>
+            <li>Solely built and maintained both the iOS and Flutter applications, covering the full development lifecycle including unit and UI testing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal d3">
+        <div class="exp-left">
+          <div class="exp-company">Scytale Alpha</div>
+          <div class="exp-period">Jun 2023 — Jul 2024</div>
+          <div class="exp-location">New Delhi, India</div>
+          <a href="https://scytaleindia.com/" target="_blank" class="exp-link-badge" style="margin-top:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">iOS App Developer</div>
+          <ul class="exp-bullets">
+            <li>Spearheaded development of a secure messaging and video conferencing iOS application with end-to-end encryption</li>
+            <li>Integrated the encryption layer into networking components and performed extensive code refactoring to improve maintainability</li>
+            <li>Established CI/CD pipelines using Fastlane and GitLab CI/CD runners, reducing manual release effort by <strong>40%</strong></li>
+            <li>Mentored junior developers and drove ownership of complex feature development across multiple product releases</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal d4">
+        <div class="exp-left">
+          <div class="exp-company">Mutual Mobile</div>
+          <div class="exp-period">Jul 2020 — Apr 2023</div>
+          <div class="exp-location">New Delhi, India</div>
+          <a href="https://apps.apple.com/us/app/lotto-com-lottery-app/id1580307415" target="_blank" class="exp-link-badge" style="margin-top:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Software Engineer (iOS)</div>
+          <ul class="exp-bullets">
+            <li>Contributed to 5+ App Store applications using UIKit with modular MVC and MVVM architectures</li>
+            <li>Delivered key features for the Magic Mountain app including HealthKit integration, Habit Tracker, and Paged Image Collage</li>
+            <li>Increased audience engagement by <strong>50%</strong> and reduced client expenses by <strong>30%</strong> through accurate estimation and on-time delivery</li>
+            <li>Championed proof-of-concept initiatives and presented newly adopted technologies to the wider engineering team</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="eyebrow reveal">Projects</div>
+    <h2 class="section-title reveal d1">What I've shipped.</h2>
+    <div class="proj-grid">
+      <div class="proj-card featured reveal d1" id="fitCard">
+        <div class="proj-icon"><img src="logo.png" alt="FitSensei logo" class="logo-img"></div>
+        <div class="proj-name">FitSensei</div>
+        <div class="proj-tagline">A solo-built iOS health and fitness app featuring workout logging, HealthKit integration, wearable sync, and personalised fitness insights. Designed, developed, and shipped entirely independently — from architecture to App Store listing.</div>
+        <div class="proj-stack">
+          <span class="stack-tag">SwiftUI</span><span class="stack-tag">SwiftData</span><span class="stack-tag">HealthKit</span><span class="stack-tag">MVVM</span><span class="stack-tag">Firebase</span><span class="stack-tag">Fastlane</span><span class="stack-tag">GitLab CI/CD</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://apps.apple.com/us/app/fitsensei/id6753600543" target="_blank" class="proj-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04l-.08.22zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="https://fitsensei.cyphix.org/" target="_blank" class="proj-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="eyebrow reveal">Education and Certifications</div>
+    <h2 class="section-title reveal d1">Background and recognition.</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal d1">
+        <span class="edu-badge badge-degree">Degree</span>
+        <div class="edu-title">Bachelor of Technology in Information Technology</div>
+        <div class="edu-sub">Dr. Akhilesh Das Gupta Institute of Technology and Management, New Delhi<br>2016 — 2020 &nbsp;·&nbsp; Score: 82%</div>
+      </div>
+      <div class="edu-card reveal d2">
+        <span class="edu-badge badge-school">School</span>
+        <div class="edu-title">Senior Secondary (10+2)</div>
+        <div class="edu-sub">Army Public School Dhaula Kuan, New Delhi<br>2014 — 2015 &nbsp;·&nbsp; Score: 86%</div>
+      </div>
+      <div class="edu-card reveal d3">
+        <span class="edu-badge badge-cert">Certificate</span>
+        <div class="edu-title">iOS App Development with Swift</div>
+        <div class="edu-sub">Specialization Certificate — Coursera</div>
+        <a href="https://www.coursera.org/account/accomplishments/specialization/CBLCGANEX5SS" target="_blank" class="edu-link">
+          View Certificate
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div class="edu-card reveal d4">
+        <span class="edu-badge badge-award">Award</span>
+        <div class="edu-title">Finalist — Smart India Hackathon 2018</div>
+        <div class="edu-sub">Selected as a national finalist in one of India's largest government-run hackathons</div>
+      </div>
+      <div class="edu-card reveal d1">
+        <span class="edu-badge badge-award">Award</span>
+        <div class="edu-title">2nd Place — Mutual Mobile Hackathon</div>
+        <div class="edu-sub">Recognised for innovation and problem-solving in a company-wide engineering competition</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="eyebrow reveal" style="text-align:center;">Contact</div>
+      <h2 class="section-title reveal d1" style="text-align:center;">Let's build something.</h2>
+      <p class="section-sub reveal d2" style="margin: 0 auto; text-align:center;">Open to iOS developer roles, freelance projects, and interesting collaborations.</p>
+      <div class="contact-btns reveal d4">
+        <a href="https://www.linkedin.com/in/cypher-naman" target="_blank" class="btn btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/cypher-naman" target="_blank" class="btn btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://fitsensei.cyphix.org/" target="_blank" class="btn btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          cyphix.org
+        </a>
+        <a href="mailto:naman.sharma.coder@gmail.com" target="_blank" class="btn btn-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Email me
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Naman Sharma &nbsp;·&nbsp; New Delhi, India &nbsp;·&nbsp;
+  <a href="mailto:naman.sharma.coder@gmail.com" style="color:inherit;text-decoration:none;">naman.sharma.coder@gmail.com</a>
+</footer>
+
+<script>
+// ── CURSOR GLOW ──
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// ── FLOATING PARTICLES ──
+const container = document.getElementById('particles');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = 2 + Math.random() * 4;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random() * 100}%;
+    animation-duration:${12 + Math.random() * 20}s;
+    animation-delay:${Math.random() * -20}s;
+    opacity:0;
+  `;
+  container.appendChild(p);
+}
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── COUNTER ANIMATION ──
+function animateCount(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1400;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const countObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCount(e.target);
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count').forEach(el => countObs.observe(el));
+
+// ── PROJECT CARD SHINE (mouse tracking) ──
+document.querySelectorAll('.proj-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+});
+
+// ── ACTIVE NAV HIGHLIGHT ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + e.target.id ? 'var(--text)' : '';
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>
